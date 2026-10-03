@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aminkhan90dhup.github.io/sitemap.xml
