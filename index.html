@@ -186,8 +186,39 @@ footer a{text-decoration:none;font-weight:600}
 #topBtn{position:fixed;right:16px;bottom:16px;z-index:60;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);cursor:pointer;font-size:18px;color:var(--ink);display:none}
 .notice{background:var(--surface2);border:1px dashed var(--line);border-radius:var(--radius);padding:18px;color:var(--muted);font-size:14.5px;margin-top:16px}
 </style>
+
+<style>
+.headline-ticker{display:flex;align-items:stretch;background:linear-gradient(90deg,#052e16,#14532d 55%,#052e16);color:#fff;overflow:hidden;border-bottom:3px solid #f59e0b;font-family:'Public Sans',system-ui,sans-serif}
+.ticker-label{flex:0 0 auto;display:flex;align-items:center;gap:6px;background:#f59e0b;color:#1c1917;font-weight:800;font-size:13px;letter-spacing:.06em;padding:9px 14px;text-transform:uppercase;z-index:2}
+.ticker-viewport{flex:1 1 auto;overflow:hidden;display:flex;align-items:center}
+.ticker-track{display:inline-flex;align-items:center;white-space:nowrap;will-change:transform;animation:ticker-scroll 32s linear infinite;padding-left:8px}
+.headline-ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-item{color:#ecfdf5;text-decoration:none;font-size:14.5px;font-weight:600;padding:0 6px}
+.ticker-item:hover{color:#fde68a;text-decoration:underline}
+.ticker-sep{color:#f59e0b;padding:0 10px;font-size:12px}
+@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+@media (max-width:640px){.ticker-label{font-size:11px;padding:8px 10px}.ticker-item{font-size:13.5px}}
+</style>
 </head>
 <body>
+
+<!-- ANIMATED HEADLINE TICKER -->
+<div class="headline-ticker" role="marquee" aria-label="Latest AI and news headlines">
+  <span class="ticker-label">🤖 AI &amp; News Live</span>
+  <div class="ticker-viewport">
+    <div class="ticker-track" id="tickerTrack">
+          <!-- TICKER-INSERT -->
+          <a class="ticker-item" href="#news">🔥 arXiv Limits Researchers to Two Papers a Month as AI Papers Flood In</a><span class="ticker-sep">✦</span>
+          <a class="ticker-item" href="#news">🤖 Meta&#8217;s AI Agent Muse Was Quietly Using Human Helpers for Phone Calls</a><span class="ticker-sep">✦</span>
+          <a class="ticker-item" href="#news">🧬 AI Discovers a CRISPR-Like Enzyme System Almost on Its Own</a><span class="ticker-sep">✦</span>
+          <a class="ticker-item" href="#news-ai">💡 What is Artificial Intelligence? — AI explained in easy words</a><span class="ticker-sep">✦</span>
+          <a class="ticker-item" href="#news">📰 Fresh Tech &amp; AI News — every morning at 9 AM on HazratAminOfficial</a><span class="ticker-sep">✦</span>
+          <a class="ticker-item" href="#apps">🚀 Muse AI, ChatGPT &amp; Google Gemini — best AI tools in Apps &amp; AI</a><span class="ticker-sep">✦</span>
+    </div>
+  </div>
+</div>
+<script>var _tt=document.getElementById('tickerTrack');if(_tt){_tt.innerHTML+=_tt.innerHTML;}</script>
 
 <header>
   <div class="wrap nav">
