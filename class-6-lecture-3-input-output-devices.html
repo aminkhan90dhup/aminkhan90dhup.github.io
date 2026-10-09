@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Lecture 3: Input and Output Devices — Class 6 CS | Hazrat Amin</title>
+<meta name="description" content="Lecture 3: Input and output devices — keyboard, mouse and scanner vs monitor, speakers and printer. Full transcript, notes and exam questions, Class 6 CS.">
+<link rel="canonical" href="https://aminkhan90dhup.github.io/class-6-lecture-3-input-output-devices.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HazratAminOfficial">
+<meta property="og:title" content="Lecture 3: Input and Output Devices — Class 6 CS | Hazrat Amin">
+<meta property="og:description" content="Lecture 3: Input and output devices — keyboard, mouse and scanner vs monitor, speakers and printer. Full transcript, notes and exam questions, Class 6 CS.">
+<meta property="og:url" content="https://aminkhan90dhup.github.io/class-6-lecture-3-input-output-devices.html">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6QC5L3KB2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q6QC5L3KB2');
+</script>
+<style>
+:root{
+  --bg:#f6f8f2; --surface:#ffffff; --surface2:#eef3e6; --ink:#14231a; --muted:#5a6b5e; --line:#dbe3d0;
+  --green:#14532d; --green2:#1b7a3d; --green-light:#dcfce7; --accent:#b7791f; --accent-bg:#fef3c7;
+  --nav-bg:rgba(246,248,242,.92); --shadow:0 10px 30px rgba(20,50,30,.12); --radius:18px;
+  --header-h:68px;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0d1710; --surface:#15251a; --surface2:#1a2f20; --ink:#e8f0e6; --muted:#a8bfa9; --line:#2a4230; --green:#4ade80; --green2:#22c55e; --green-light:#14351e; --accent:#fbbf24; --accent-bg:#2b2105; --nav-bg:rgba(13,23,16,.92); --shadow:0 10px 30px rgba(0,0,0,.45);}
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header-h) + 14px)}
+body{margin:0;font-family:"Public Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:inherit} img{max-width:100%;display:block}
+h1,h2,h3{line-height:1.15;margin:0} p{margin:0}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+/* Header / Nav */
+header{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:var(--header-h)}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:800;letter-spacing:-.02em}
+.brand-mark{width:40px;height:40px;border-radius:11px;overflow:hidden;background:var(--green);color:#fff;display:grid;place-items:center;font-family:"DM Serif Display",serif;font-size:20px;flex:none}
+@media(prefers-color-scheme:dark){.brand-mark{background:#166534}}
+.brand small{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.brand span{font-size:17px}
+.menu-btn{display:none;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-weight:700;cursor:pointer;color:var(--ink)}
+nav.main{display:flex;align-items:center;gap:2px}
+nav.main>a, .drop-btn{padding:9px 12px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14.5px;background:none;border:none;cursor:pointer;color:var(--ink);font-family:inherit;display:inline-flex;align-items:center;gap:5px}
+nav.main>a:hover,.drop-btn:hover{background:var(--surface2)}
+.drop{position:relative}
+.drop-panel{position:absolute;top:calc(100% + 8px);left:0;min-width:240px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:8px;display:none}
+.drop.open .drop-panel{display:block}
+.drop-panel a{display:flex;flex-direction:column;gap:1px;padding:10px 12px;border-radius:10px;text-decoration:none}
+.drop-panel a:hover{background:var(--surface2)}
+.drop-panel a b{font-size:14.5px}.drop-panel a span{font-size:12.5px;color:var(--muted);font-weight:500}
+.caret{font-size:11px;transition:transform .2s}.drop.open .caret{transform:rotate(180deg)}
+.nav-cta{background:var(--green)!important;color:#fff!important}
+@media(prefers-color-scheme:dark){.nav-cta{background:#166534!important}}
+@media(max-width:900px){
+  .menu-btn{display:block}
+  nav.main{display:none;position:absolute;top:var(--header-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 16px 16px;gap:4px}
+  nav.main.show{display:flex}
+  nav.main>a,.drop-btn{width:100%;justify-content:space-between;padding:12px}
+  .drop-panel{position:static;box-shadow:none;border:none;background:var(--surface2);margin:2px 0 6px}
+}
+/* Hero */
+.hero{position:relative;overflow:hidden}
+.hero-img{width:100%;height:520px;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,30,14,.18) 0%,rgba(8,30,14,.72) 78%)}
+.hero-content{position:absolute;inset:0;display:flex;align-items:flex-end}
+.hero-inner{padding:36px 20px 40px;color:#fff;max-width:760px;width:100%}
+.hero-inner h1{font-family:"DM Serif Display",serif;font-size:clamp(40px,7vw,68px);font-weight:400;letter-spacing:-.01em}
+.hero-roles{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.hero-roles span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(6px);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:700}
+.hero-inner p{font-size:17px;color:#e6f2e6;max-width:620px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;font-weight:700;text-decoration:none;font-size:15px;border:1px solid transparent;cursor:pointer}
+.btn-red{background:#dc2626;color:#fff}.btn-white{background:#fff;color:#14231a}.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+.btn-green{background:var(--green);color:#fff}@media(prefers-color-scheme:dark){.btn-green{background:#166534}}
+.btn-outline{background:var(--surface);color:var(--ink);border-color:var(--line)}
+@media(max-width:640px){.hero-img{height:700px}.hero-inner h1{font-size:34px;overflow-wrap:break-word;line-height:1.1}.hero-inner p{font-size:15.5px}.hero-inner{padding-bottom:30px}}
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:-28px auto 0;position:relative;z-index:2}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.stat b{font-size:22px;display:block}.stat span{font-size:13px;color:var(--muted);font-weight:600}
+@media(max-width:800px){.stats{grid-template-columns:1fr 1fr}}
+/* Sections */
+section{padding:56px 0 8px}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green2)}
+section h2{font-family:"DM Serif Display",serif;font-weight:400;font-size:clamp(28px,4vw,38px);margin:6px 0 8px}
+.lead{color:var(--muted);max-width:700px;font-size:16.5px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:10px}
+.card h3{font-size:18px}.card p{color:var(--muted);font-size:14.5px;flex:1}
+.tag{align-self:flex-start;font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:var(--green-light);color:var(--green)}
+.tag.amber{background:var(--accent-bg);color:var(--accent)}
+.card a.more{font-weight:700;text-decoration:none;color:var(--green2);font-size:14.5px}
+.meta{font-size:12.5px;color:var(--muted);font-weight:600}
+/* Filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:700;font-size:13.5px;cursor:pointer;color:var(--ink);font-family:inherit}
+.chip.active{background:var(--green);color:#fff;border-color:var(--green)}
+@media(prefers-color-scheme:dark){.chip.active{background:#166534;border-color:#166534}}
+.hidden{display:none!important}
+/* Featured */
+.featured{margin-top:22px;background:var(--green);color:#fff;border-radius:22px;padding:28px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+@media(prefers-color-scheme:dark){.featured{background:#14532d}}
+@media(max-width:760px){.featured{grid-template-columns:1fr}}
+.featured h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:28px}
+.featured p{color:#d1e7d3;margin-top:8px}
+.playbox{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:20px;text-align:center}
+.play{width:64px;height:64px;border-radius:50%;background:#fff;color:#14532d;display:grid;place-items:center;font-size:24px;margin:0 auto 10px}
+/* Valley */
+.valley-hero{border-radius:22px;overflow:hidden;margin-top:22px;position:relative}
+.valley-hero img{width:100%;height:340px;object-fit:cover}
+.valley-hero figcaption{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;color:#fff;background:linear-gradient(transparent,rgba(5,25,10,.75));font-weight:600}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+@media(max-width:800px){.gallery{grid-template-columns:1fr 1fr}}
+.gallery figure{margin:0;border-radius:16px;overflow:hidden;position:relative;cursor:pointer;border:1px solid var(--line)}
+.gallery img{width:100%;height:190px;object-fit:cover;transition:transform .3s}
+.gallery figure:hover img{transform:scale(1.04)}
+.gallery figcaption{position:absolute;bottom:0;left:0;right:0;padding:22px 12px 10px;color:#fff;font-size:13px;font-weight:700;background:linear-gradient(transparent,rgba(0,0,0,.65))}
+/* About / Contact */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.about-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.about-card ul{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+.contact-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:100;display:none;place-items:center;padding:20px}
+.lightbox.open{display:grid}
+.lightbox img{max-height:82vh;border-radius:14px}
+.lightbox button{position:absolute;top:18px;right:18px;background:#fff;border:none;border-radius:999px;padding:10px 16px;font-weight:800;cursor:pointer}
+.lightbox p{color:#fff;text-align:center;margin-top:12px;font-weight:600}
+footer{margin-top:64px;border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:14px}
+footer .cols{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between}
+footer a{text-decoration:none;font-weight:600}
+#topBtn{position:fixed;right:16px;bottom:16px;z-index:60;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);cursor:pointer;font-size:18px;color:var(--ink);display:none}
+.notice{background:var(--surface2);border:1px dashed var(--line);border-radius:var(--radius);padding:18px;color:var(--muted);font-size:14.5px;margin-top:16px}
+
+/* MOBILE-FRIENDLY-PASS (2026-10-04) */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:clip;-webkit-tap-highlight-color:transparent}
+img,video,iframe,svg{max-width:100%}
+p,a,h1,h2,h3,li,figcaption{overflow-wrap:break-word}
+a,button{-webkit-tap-highlight-color:transparent}
+.lightbox img{max-width:100%;height:auto}
+@media(max-width:640px){
+  .wrap{padding:0 16px}
+  section{padding:38px 0 4px}
+  .card{padding:16px}
+  .about-card{padding:18px}
+  .featured{padding:20px;border-radius:18px}
+  .notice{padding:14px}
+  .btn{min-height:46px;justify-content:center}
+  .hero-btns .btn{flex:1 1 auto}
+  .chip{min-height:42px;padding:9px 15px}
+  nav.main>a,.drop-btn{min-height:48px;align-items:center}
+  .drop-panel a{padding:12px;min-height:48px}
+  .contact-row .btn{flex:1 1 100%}
+  .hero-img{height:min(540px,82vh)}
+  .valley-hero img{height:230px}
+  .gallery{gap:9px}
+  .gallery img{height:150px}
+  .gallery figcaption{font-size:12px;padding:18px 9px 8px}
+  .stats{gap:9px;margin-top:-20px}
+  .stat{padding:13px}
+  .stat b{font-size:19px}
+  footer .cols{flex-direction:column;gap:16px}
+  #topBtn{right:12px;bottom:calc(12px + env(safe-area-inset-bottom))}
+  .brand span{font-size:15.5px}
+}
+@media(max-width:380px){
+  .gallery{grid-template-columns:1fr 1fr}
+  .hero-inner h1{font-size:30px}
+  .stats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a href="/" style="font-weight:800;font-size:20px;text-decoration:none">HazratAminOfficial</a>
+  <nav style="margin-top:8px;display:flex;gap:16px;flex-wrap:wrap">
+    <a href="/">Home</a>
+    <a href="class-6-computer-science.html">Lectures</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="news.html">News</a>
+    <a href="/#shop">Shop</a>
+    <a href="/#about">About</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<div class="kicker">Lectures by Hazrat Amin • Class 6 • New KP Syllabus</div>
+<h2>Lecture 3: Input and Output Devices</h2>
+<p class="lead">Input devices send information INTO the computer; output devices bring the result OUT. Keyboard, mouse and scanner on one side — monitor, speakers and printer on the other — made simple.</p>
+<div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/nvFjYXIshxA" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
+<h3>What you will learn</h3>
+<ul>
+  <li>An input device is a part of the computer that sends information INTO the computer — like our mouth when we speak, it gives the computer something to work on.</li>
+  <li>Keyboard: sends letters and numbers when we type. Mouse: sends our clicks and movements.</li>
+  <li>Scanner: sends a photo or a page into the computer. Microphone: sends our voice. Webcam: sends our picture.</li>
+  <li>An output device brings information OUT of the computer, so that we can see it, hear it, or hold it in our hands — it is the computer talking back to us.</li>
+  <li>Monitor: shows us pictures, words and videos. Speakers and headphones: give us sound and music. Printer: gives us our work on paper.</li>
+  <li>Remember: input goes in, output comes out!</li>
+</ul>
+<h3>Full transcript</h3>
+<p>Assalam-o-Alaikum, dear students! Welcome back to Computer Science, Class Six. I am your teacher, Hazrat Amin. In the last lesson, we learned about the microprocessor — the brain of the computer. Today we will learn about input and output devices.</p>
+<p>First, what is an input device? An input device is a part of the computer that sends information INTO the computer. It is like our mouth when we speak — we give the computer something to work on.</p>
+<p>Examples of input devices. The keyboard sends letters and numbers when we type. The mouse sends our clicks and movements. The scanner sends a photo or a page into the computer. The microphone sends our voice, and the webcam sends our picture.</p>
+<p>Now, what is an output device? An output device brings information OUT of the computer, so that we can see it, hear it, or hold it in our hands. It is the computer talking back to us.</p>
+<p>Examples of output devices. The monitor shows us pictures, words and videos. The speakers and headphones give us sound and music. The printer gives us our work on paper. Remember: input goes in, output comes out!</p>
+<p>Let us revise. Input devices — keyboard, mouse, scanner, microphone — send information into the computer. Output devices — monitor, speakers, printer — bring the result out for us. In the next lesson, we will learn about the system unit and its parts. Goodbye, and keep learning!</p>
+<h3>Exam questions — test yourself</h3>
+<p><b>Q1.</b> Which of these is an input device?</p><ul style="list-style:none"><li>a) Monitor</li><li>b) Printer</li><li>c) Scanner</li><li>d) Speakers</li></ul><p><b>Q2.</b> A microphone sends ___ into the computer.</p><ul style="list-style:none"><li>a) Pictures on paper</li><li>b) Our voice</li><li>c) Printed pages</li><li>d) Light</li></ul><p><b>Q3.</b> Which device gives us our work on paper?</p><ul style="list-style:none"><li>a) Keyboard</li><li>b) Webcam</li><li>c) Monitor</li><li>d) Printer</li></ul><p><b>Q4.</b> Define input device and output device, with two examples of each.</p><p><b>Q5.</b> "Input goes in, output comes out." Explain this line using a keyboard and a monitor.</p>
+<details><summary><b>Answers — click to check</b></summary>
+<p><b>Q1:</b> Scanner</p><p><b>Q2:</b> Our voice</p><p><b>Q3:</b> Printer</p><p><b>Q4:</b> An input device sends information INTO the computer (examples: keyboard, mouse). An output device brings information OUT of the computer so we can see it, hear it or hold it (examples: monitor, printer).</p><p><b>Q5:</b> When we type on the keyboard, letters go INTO the computer — so the keyboard is an input device. The monitor shows us the result that comes OUT of the computer — so the monitor is an output device. Input goes in, output comes out.</p>
+</details>
+<p style="margin-top:22px;display:flex;gap:18px;flex-wrap:wrap"><a href="class-6-lecture-2-microprocessor.html">← Previous: Lecture 2: Microprocessor — The Brain of the Computer</a> · <span>Next lecture coming soon: System Unit and its parts</span></p>
+<p><a href="class-6-computer-science.html">📚 All Class 6 lectures</a></p>
+</main>
+<footer><div class="wrap">
+  <p>© 2026 Hazrat Amin — HazratAminOfficial · GHS Jijal, Lower Kohistan</p>
+</div></footer>
+</body>
+</html>
