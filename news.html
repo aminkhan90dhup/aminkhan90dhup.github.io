@@ -235,12 +235,12 @@ a,button{-webkit-tap-highlight-color:transparent}
         {name:'\u{1F30D} BBC News — Live Radio', url:'https://stream.live.vc.bbcmedia.co.uk/bbc_world_service'},
         {name:'\u{1F1F5}\u{1F1F0} Geo News — Live Audio', link:'https://radio.net.pk/geo/'},
         {name:'\u{1F4FB} Instant Radio — Website', link:'https://instant.radio/'},
-        {name:'\u{1F3CF} Radio Pakistan — Live Radio', url:'https://whmsonic.radio.gov.pk:7002/stream'},
-        {name:'\u{1F3CF} PCB Live — Official Match Stream', link:'https://live.pcb.com.pk/home'}
+        {name:'\u{1F3CF} PCB Live — Official Match Stream', link:'https://live.pcb.com.pk/home'},
+        {name:'\u{1F3CF} Tamasha — Live Match', link:'https://tamashaweb.com/'}
       ];
       (function(){
         var box=document.getElementById('stationBtns'), au=document.getElementById('liveAudio'), note=document.getElementById('stationNote');
-        note.textContent='Apni pasand ka channel chunen — BBC aur Radio Pakistan yahin isi player mein chalenge; Geo News, Instant Radio aur PCB Live un ki apni website par khulenge. Aaj ke PAK vs SL match ki official live coverage PCB Live par hai.'';
+        note.textContent='Apni pasand ka channel chunen — BBC yahin isi player mein chalega; Geo News, Instant Radio, PCB Live aur Tamasha un ki apni website par khulenge. Aaj ke PAK vs SL match ki official live coverage PCB Live par hai.';
         STATIONS.forEach(function(st){
           var b=document.createElement('button');
           b.textContent=st.name; b.className='btn'; b.style.cursor='pointer';
