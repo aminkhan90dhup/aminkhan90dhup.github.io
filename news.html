@@ -231,15 +231,22 @@ a,button{-webkit-tap-highlight-color:transparent}
       <audio id="liveAudio" controls preload="none" style="width:100%"></audio>
       <p class="meta" id="stationNote">Channels jald shamil kiye ja rahe hain.</p>
       <script>
-      var STATIONS=[];
+      var STATIONS=[
+        {name:'\u{1F30D} BBC News — Live Radio', url:'https://stream.live.vc.bbcmedia.co.uk/bbc_world_service'},
+        {name:'\u{1F1F5}\u{1F1F0} Geo News — Live Audio', link:'https://radio.net.pk/geo/'},
+        {name:'\u{1F4FB} Instant Radio — Website', link:'https://instant.radio/'}
+      ];
       (function(){
         var box=document.getElementById('stationBtns'), au=document.getElementById('liveAudio'), note=document.getElementById('stationNote');
-        if(!STATIONS.length){ note.textContent='Live channels jald shamil kiye ja rahe hain — radio aur news channels ke links lagaye ja rahe hain.'; au.style.display='none'; return; }
-        note.textContent='Abhi chal raha hai: koi channel muntakhib karen.';
-        STATIONS.forEach(function(st,i){
+        note.textContent='Apni pasand ka channel chunen — BBC yahin isi player mein chalega; Geo News aur Instant Radio un ki apni website par khulenge.';
+        STATIONS.forEach(function(st){
           var b=document.createElement('button');
           b.textContent=st.name; b.className='btn'; b.style.cursor='pointer';
-          b.onclick=function(){ au.src=st.url; au.play(); note.textContent='Abhi chal raha hai: '+st.name; };
+          b.onclick=function(){
+            if(st.link){ window.open(st.link,'_blank','noopener'); note.textContent=st.name+' — nayi tab mein khul gaya hai.'; return; }
+            au.src=st.url; au.style.display=''; au.play();
+            note.textContent='Abhi chal raha hai: '+st.name;
+          };
           box.appendChild(b);
         });
       })();
