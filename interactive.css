@@ -1,0 +1,26 @@
+/* HazratAminOfficial — interactive layer */
+:root[data-theme="dark"]{--bg:#0d1710;--surface:#15251a;--surface2:#1a2f20;--ink:#e8f0e6;--muted:#a8bfa9;--line:#2a4230;--green:#4ade80;--green2:#22c55e;--green-light:#14351e;--accent:#fbbf24;--accent-bg:#2b2105;--nav-bg:rgba(13,23,16,.92);--shadow:0 10px 30px rgba(0,0,0,.45)}
+:root[data-theme="light"]{--bg:#f6f8f2;--surface:#ffffff;--surface2:#eef3e6;--ink:#14231a;--muted:#5a6b5e;--line:#dbe3d0;--green:#14532d;--green2:#1b7a3d;--green-light:#dcfce7;--accent:#b7791f;--accent-bg:#fef3c7;--nav-bg:rgba(246,248,242,.92);--shadow:0 10px 30px rgba(20,50,30,.12)}
+#haProgress{position:fixed;top:0;left:0;height:3px;background:#b91c1c;width:0;z-index:999;transition:width .1s linear}
+.ha-clock{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:700;color:var(--ink);margin-top:8px}
+.ha-fabs{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:998;display:flex;flex-direction:column;gap:10px}
+.ha-fab{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:20px;cursor:pointer;box-shadow:var(--shadow);display:grid;place-items:center}
+.ha-fab:hover{background:var(--surface2)}
+#haSearchOverlay{position:fixed;inset:0;background:rgba(10,20,12,.55);z-index:1000;display:none;align-items:flex-start;justify-content:center;padding:70px 16px 16px}
+#haSearchOverlay.open{display:flex}
+.ha-search-box{background:var(--surface);color:var(--ink);border-radius:16px;box-shadow:var(--shadow);width:min(620px,100%);padding:16px;border:1px solid var(--line)}
+.ha-search-box input{width:100%;padding:12px 14px;font-size:16px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);outline:none}
+.ha-results{margin-top:10px;max-height:50vh;overflow:auto}
+.ha-results a{display:flex;flex-direction:column;gap:1px;padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--ink)}
+.ha-results a:hover,.ha-results a.active{background:var(--surface2)}
+.ha-results a b{font-size:15px}.ha-results a span{font-size:12.5px;color:var(--muted)}
+.ha-reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.ha-reveal.ha-in{opacity:1;transform:none}
+#matchCentre{background:linear-gradient(135deg,#14532d,#1b7a3d);color:#fff;border-radius:16px;padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+#matchCentre h3{color:#fff;margin:0 0 4px}
+#matchCentre .mc-next{font-size:15px;opacity:.95}
+#matchCentre .mc-count{font-size:30px;font-weight:800;letter-spacing:.02em;margin:8px 0;font-variant-numeric:tabular-nums}
+#matchCentre .mc-count small{font-size:13px;font-weight:600;opacity:.85}
+.mc-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 6px}
+.mc-tab{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 14px;font-weight:700;font-size:13.5px;cursor:pointer}
+.mc-tab.active{background:#b91c1c;color:#fff;border-color:#b91c1c}
