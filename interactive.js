@@ -37,7 +37,7 @@ var INDEX=[
 ['Lecture 1 — Introduction to Computer','class-6-lecture-1-introduction-to-computer.html','lecture 1 computer hardware software'],
 ['Lecture 2 — Microprocessor','class-6-lecture-2-microprocessor.html','lecture 2 cpu brain microprocessor'],
 ['Lecture 3 — Input and Output Devices','class-6-lecture-3-input-output-devices.html','lecture 3 input output devices keyboard mouse'],
-['Technology News','news.html','news tech ai technology khabar'],
+['News & Tech','news.html','news tech ai technology khabar'],
 ['Breaking: KP Emergency & Arrests','news.html','breaking news emergency khyber pakhtunkhwa sohail afridi junaid akbar arrested governor rule'],
 ['Jobs — Latest ETEA & NTS Jobs','jobs.html','jobs nokri etea nts vacancy'],
 ['Job — Rescue 1122 KP','job-rescue-1122-kp-839.html','rescue 1122 jobs'],
