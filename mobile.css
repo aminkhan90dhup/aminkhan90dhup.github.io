@@ -1,0 +1,31 @@
+/* HazratAminOfficial — mobile-friendly pass (loaded last on every page) */
+@media (max-width:900px){
+  /* homepage header: clock chip gets its own full row instead of being squeezed */
+  header .wrap.nav{flex-wrap:wrap}
+  header .wrap.nav .ha-clock{flex:1 1 100%;order:99;justify-content:center;margin-top:8px}
+  .ha-clock{font-size:12.5px}
+  .menu-btn{white-space:nowrap}
+  /* subpage menu: one swipeable row with proper tap targets */
+  header .wrap > nav:not(.main){flex-wrap:nowrap !important;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:4px !important;padding-bottom:6px}
+  header .wrap > nav:not(.main)::-webkit-scrollbar{display:none}
+  header .wrap > nav:not(.main) a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:44px;padding:8px 10px}
+  /* floating buttons: one compact row, and page end stays clear of them */
+  .ha-fabs{flex-direction:row;right:10px;bottom:calc(10px + env(safe-area-inset-bottom))}
+  .ha-fab{width:42px;height:42px;font-size:18px;opacity:.96}
+  body{padding-bottom:60px}
+  .mc-tab{min-height:44px;display:inline-flex;align-items:center;padding:8px 16px}
+}
+@media (max-width:640px){
+  /* hero: stats no longer overlap the hero buttons */
+  .stats{margin-top:14px}
+  .hero-btns a{min-height:44px;display:inline-flex;align-items:center}
+  .ticker-label{font-size:12px;padding:8px 10px}
+  .share-btn{min-height:40px;display:inline-flex;align-items:center;padding:6px 14px}
+  /* sports sticker: smaller, slower, easier to read */
+  .sticker-track span{font-size:13px;padding:0 18px}
+  .sticker-track{-webkit-animation-duration:55s;animation-duration:55s}
+  .meta{font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ticker-track,.sticker-track{-webkit-animation-duration:200s;animation-duration:200s}
+}

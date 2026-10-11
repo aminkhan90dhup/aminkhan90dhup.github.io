@@ -65,6 +65,11 @@ bSearch.onclick=function(){overlay.classList.add('open');render('');setTimeout(f
 overlay.addEventListener('click',function(e){if(e.target===overlay){overlay.classList.remove('open');}});
 input.addEventListener('input',function(){render(input.value);});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){overlay.classList.remove('open');}});
+/* ---------- tap a ticker to pause / resume ---------- */
+document.querySelectorAll('.ticker-track,.sticker-track').forEach(function(t){
+  t.style.cursor='pointer';t.title='Tap to pause / resume';
+  t.addEventListener('click',function(){t.style.animationPlayState=t.style.animationPlayState==='paused'?'running':'paused';});
+});
 /* ---------- reveal on scroll ---------- */
 var cards=document.querySelectorAll('.card');
 if('IntersectionObserver' in window&&cards.length){
