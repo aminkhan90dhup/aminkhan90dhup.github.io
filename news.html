@@ -223,6 +223,29 @@ a,button{-webkit-tap-highlight-color:transparent}
         <p><b>Developing story — latest:</b> after the emergency and governor's rule, KP Chief Minister Muhammad Sohail Afridi and PTI provincial president Junaid Akbar have been arrested, PTI leaders have confirmed, according to reports by 24 News and Express News. Meetings with the chief minister had been banned and the CM House staff restricted, the reports add.</p>
         <span class="meta">11 October 2026 • Sources: ARY News, Aaj News, Geo News, 24 News</span>
       </article>
+    <section class="card" id="listen-live" style="margin-top:18px">
+      <span class="tag" style="background:#b91c1c;color:#fff">🎧 LISTEN LIVE</span>
+      <h3 style="margin-top:8px">Listen Live — Radio &amp; News Channels</h3>
+      <p>Live audio nashriyat — radio aur news channels ki live streaming yahan sunen. Apni pasand ke channel ka button dabayen, awaz khud shuru ho jayegi.</p>
+      <div id="stationBtns" style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0"></div>
+      <audio id="liveAudio" controls preload="none" style="width:100%"></audio>
+      <p class="meta" id="stationNote">Channels jald shamil kiye ja rahe hain.</p>
+      <script>
+      var STATIONS=[];
+      (function(){
+        var box=document.getElementById('stationBtns'), au=document.getElementById('liveAudio'), note=document.getElementById('stationNote');
+        if(!STATIONS.length){ note.textContent='Live channels jald shamil kiye ja rahe hain — radio aur news channels ke links lagaye ja rahe hain.'; au.style.display='none'; return; }
+        note.textContent='Abhi chal raha hai: koi channel muntakhib karen.';
+        STATIONS.forEach(function(st,i){
+          var b=document.createElement('button');
+          b.textContent=st.name; b.className='btn'; b.style.cursor='pointer';
+          b.onclick=function(){ au.src=st.url; au.play(); note.textContent='Abhi chal raha hai: '+st.name; };
+          box.appendChild(b);
+        });
+      })();
+      </script>
+    </section>
+
 <h3>Today's top story</h3>
 <article class="card" id="news-2026-10-11">
         <span class="tag">Daily Tech News</span>
