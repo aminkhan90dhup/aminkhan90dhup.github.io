@@ -241,6 +241,12 @@ a,button{-webkit-tap-highlight-color:transparent}
       (function(){
         var box=document.getElementById('stationBtns'), au=document.getElementById('liveAudio'), note=document.getElementById('stationNote');
         note.textContent='Apni pasand ka channel chunen — BBC World Service yahin isi player mein chalega; BBC Asian Network, Instant Radio, PCB Live aur Tamasha un ki apni website par khulenge. Aaj ke PAK vs SL match ki official live coverage PCB Live par hai.';
+        // Background playback: tell the Android app (if running inside it) when radio starts/stops,
+        // so the app can hold a foreground service and the stream keeps playing while minimized.
+        function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
+        au.addEventListener('play',function(){ bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); } }catch(e){} });
+        au.addEventListener('pause',function(){ bridge(false); });
+        au.addEventListener('ended',function(){ bridge(false); });
         STATIONS.forEach(function(st){
           var b=document.createElement('button');
           b.textContent=st.name; b.className='btn'; b.style.cursor='pointer';
