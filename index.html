@@ -336,6 +336,32 @@ a,button{-webkit-tap-highlight-color:transparent}
     </div>
   </div>
 
+  <!-- LISTEN LIVE — BBC NEWS (homepage, added 2026-10-13 at Hazrat's request: homepage carries ONLY BBC News) -->
+  <section id="listen-live"><div class="wrap">
+    <div class="kicker">Listen Live</div>
+    <h2>🎧 Listen Live — BBC News</h2>
+    <p class="lead" style="margin-bottom:14px">BBC World Service ki live nashriyat — button dabayen, khabrein yahin isi player mein chalengi.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0">
+      <button class="btn" id="bbcPlayBtn" style="cursor:pointer">🌍 BBC News — Live Radio</button>
+    </div>
+    <audio id="homeAudio" controls preload="none" style="width:100%"></audio>
+    <p class="meta" id="homeStationNote">BBC News sunne ke liye upar wala button dabayen. Baqi tamam channels (BBC Asian Network, PCB Live, Tamasha waghera) <a href="news.html">News page ke Listen Live section</a> mein hain.</p>
+    <script>
+    (function(){
+      var au=document.getElementById('homeAudio'), btn=document.getElementById('bbcPlayBtn'), note=document.getElementById('homeStationNote');
+      function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
+      au.addEventListener('play',function(){ bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); } }catch(e){} });
+      au.addEventListener('pause',function(){ bridge(false); });
+      au.addEventListener('ended',function(){ bridge(false); });
+      btn.onclick=function(){
+        if(!au.src){ au.src='https://stream.live.vc.bbcmedia.co.uk/bbc_world_service'; }
+        au.play();
+        note.textContent='Abhi chal raha hai: 🌍 BBC News — BBC World Service (Live)';
+      };
+    })();
+    </script>
+  </div></section>
+
   <!-- LECTURES -->
   <!-- INTRO VIDEO -->
   <section id="intro"><div class="wrap">
