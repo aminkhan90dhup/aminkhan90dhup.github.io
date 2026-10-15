@@ -43,6 +43,7 @@ var INDEX=[
 ['Job — Rescue 1122 KP','job-rescue-1122-kp-839.html','rescue 1122 jobs'],
 ['Job — KGMC Peshawar','job-kgmc-868.html','kgmc khyber girls medical college jobs'],
 ['Sports — Cricket Schedule','sports.html','sports cricket match schedule pakistan sri lanka t20i odi test'],
+['Weather — Pakistan & Dhup Jijal','weather.html','weather mausam pakistan jijal kohistan dhup forecast temperature rain'],
 ['YouTube — Hazrat Amin Official','youtube.html','youtube videos shorts channel'],
 ['Fiverr Services','fiverr.html','fiverr gigs services video editing'],
 ['Apps & AI Tools','apps.html','apps ai tools chatgpt websites'],
