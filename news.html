@@ -219,6 +219,7 @@ a,button{-webkit-tap-highlight-color:transparent}
       <p>Live audio nashriyat — radio aur news channels ki live streaming yahan sunen. Apni pasand ke channel ka button dabayen, awaz khud shuru ho jayegi.</p>
       <div id="stationBtns" style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0"></div>
       <audio id="liveAudio" controls preload="none" style="width:100%"></audio>
+      <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
       <p class="meta" id="stationNote">Channels jald shamil kiye ja rahe hain.</p>
       <script>
       var STATIONS=[
@@ -237,6 +238,7 @@ a,button{-webkit-tap-highlight-color:transparent}
         // Background playback: tell the Android app (if running inside it) when radio starts/stops,
         // so the app can hold a foreground service and the stream keeps playing while minimized.
         function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
+        au.addEventListener('playing',function(){ if(window.__currentStation){ note.textContent='Abhi chal raha hai: '+window.__currentStation; } });
         au.addEventListener('play',function(){ bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); } }catch(e){} });
         au.addEventListener('pause',function(){ bridge(false); });
         au.addEventListener('ended',function(){ bridge(false); });
@@ -246,15 +248,22 @@ a,button{-webkit-tap-highlight-color:transparent}
           b.onclick=function(){
             if(st.link){ window.open(st.link,'_blank','noopener'); note.textContent=st.name+' — nayi tab mein khul gaya hai.'; return; }
             try{ if(window.__hls){ window.__hls.destroy(); window.__hls=null; } }catch(e){}
-            au.style.display='';
-            if(st.hls && !au.canPlayType('application/vnd.apple.mpegurl')){
-              note.textContent='Load ho raha hai: '+st.name+' …';
+            au.style.display=''; window.__currentStation=st.name;
+            note.textContent='Load ho raha hai: '+st.name+' …';
+            var playDirect=function(){ au.src=st.url; var pr=au.play(); if(pr&&pr.catch){ pr.catch(function(){ note.textContent='Player ka Play button dabayen: '+st.name; }); } };
+            if(st.hls){
               var startHls=function(){
                 if(window.Hls && Hls.isSupported()){
                   var h=new Hls(); window.__hls=h; h.loadSource(st.url); h.attachMedia(au);
-                  h.on(Hls.Events.MANIFEST_PARSED,function(){ au.play(); });
-                } else { au.src=st.url; au.play(); }
+                  h.on(Hls.Events.MANIFEST_PARSED,function(){ var pr=au.play(); if(pr&&pr.catch){ pr.catch(function(){ note.textContent='Player ka Play button dabayen: '+st.name; }); } });
+                  h.on(Hls.Events.ERROR,function(ev,data){ if(data&&data.fatal){ note.textContent='Ye channel abhi nahi chal saka — dobara try karen.'; } });
+                } else if(au.canPlayType('application/vnd.apple.mpegurl')){ playDirect(); }
+                else { playDirect(); }
               };
+              if(window.Hls){ startHls(); }
+              else { var sc=document.createElement('script'); sc.src='https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js'; sc.onload=startHls; sc.onerror=playDirect; document.head.appendChild(sc); }
+            } else { playDirect(); }
+          };
               if(window.Hls){ startHls(); }
               else { var sc=document.createElement('script'); sc.src='https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js'; sc.onload=startHls; sc.onerror=function(){ au.src=st.url; au.play(); }; document.head.appendChild(sc); }
             } else {
