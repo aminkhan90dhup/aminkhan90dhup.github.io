@@ -264,13 +264,6 @@ a,button{-webkit-tap-highlight-color:transparent}
               else { var sc=document.createElement('script'); sc.src='https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js'; sc.onload=startHls; sc.onerror=playDirect; document.head.appendChild(sc); }
             } else { playDirect(); }
           };
-              if(window.Hls){ startHls(); }
-              else { var sc=document.createElement('script'); sc.src='https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js'; sc.onload=startHls; sc.onerror=function(){ au.src=st.url; au.play(); }; document.head.appendChild(sc); }
-            } else {
-              au.src=st.url; au.play();
-            }
-            note.textContent='Abhi chal raha hai: '+st.name;
-          };
           box.appendChild(b);
         });
       })();
