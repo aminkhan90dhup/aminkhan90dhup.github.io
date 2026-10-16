@@ -223,6 +223,9 @@ a,button{-webkit-tap-highlight-color:transparent}
       <script>
       var STATIONS=[
         {name:'\u{1F30D} BBC News — Live Radio', url:'https://stream.live.vc.bbcmedia.co.uk/bbc_world_service'},
+        {name:'\u{1F3B5} Hum FM 106 — Urdu Music (Pakistan)', url:'https://funasia.streamguys1.com/live4'},
+        {name:'\u{1F3B6} Radio Mirchi 98.3 — Bollywood Hindi', url:'https://playerservices.streamtheworld.com/api/livestream-redirect/NJS_HIN_ESTAAC.aac'},
+        {name:'\u{1F4FB} Vividh Bharati — Hindi Classic Songs', url:'https://air.pc.cdn.bitgravity.com/air/live/pbaudio001/playlist.m3u8', hls:true},
         {name:'\u{1F3A7} BBC Asian Network — Live Radio', link:'https://www.bbc.co.uk/sounds/play/live:bbc_asian_network'},
         {name:'\u{1F4FB} Instant Radio — Website', link:'https://instant.radio/'},
         {name:'\u{1F3CF} PCB Live — Official Match Stream', link:'https://live.pcb.com.pk/home'},
@@ -230,7 +233,7 @@ a,button{-webkit-tap-highlight-color:transparent}
       ];
       (function(){
         var box=document.getElementById('stationBtns'), au=document.getElementById('liveAudio'), note=document.getElementById('stationNote');
-        note.textContent='Apni pasand ka channel chunen — BBC World Service yahin isi player mein chalega; BBC Asian Network, Instant Radio, PCB Live aur Tamasha un ki apni website par khulenge. Aaj ke PAK vs SL match ki official live coverage PCB Live par hai.';
+        note.textContent='Apni pasand ka channel chunen — BBC World Service, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge; BBC Asian Network, Instant Radio, PCB Live aur Tamasha un ki apni website par khulenge.';
         // Background playback: tell the Android app (if running inside it) when radio starts/stops,
         // so the app can hold a foreground service and the stream keeps playing while minimized.
         function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
@@ -242,7 +245,21 @@ a,button{-webkit-tap-highlight-color:transparent}
           b.textContent=st.name; b.className='btn'; b.style.cursor='pointer';
           b.onclick=function(){
             if(st.link){ window.open(st.link,'_blank','noopener'); note.textContent=st.name+' — nayi tab mein khul gaya hai.'; return; }
-            au.src=st.url; au.style.display=''; au.play();
+            try{ if(window.__hls){ window.__hls.destroy(); window.__hls=null; } }catch(e){}
+            au.style.display='';
+            if(st.hls && !au.canPlayType('application/vnd.apple.mpegurl')){
+              note.textContent='Load ho raha hai: '+st.name+' …';
+              var startHls=function(){
+                if(window.Hls && Hls.isSupported()){
+                  var h=new Hls(); window.__hls=h; h.loadSource(st.url); h.attachMedia(au);
+                  h.on(Hls.Events.MANIFEST_PARSED,function(){ au.play(); });
+                } else { au.src=st.url; au.play(); }
+              };
+              if(window.Hls){ startHls(); }
+              else { var sc=document.createElement('script'); sc.src='https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js'; sc.onload=startHls; sc.onerror=function(){ au.src=st.url; au.play(); }; document.head.appendChild(sc); }
+            } else {
+              au.src=st.url; au.play();
+            }
             note.textContent='Abhi chal raha hai: '+st.name;
           };
           box.appendChild(b);
