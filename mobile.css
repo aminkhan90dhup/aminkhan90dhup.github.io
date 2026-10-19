@@ -27,5 +27,5 @@
   .meta{font-size:13px}
 }
 @media (prefers-reduced-motion:reduce){
-  .ticker-track,.sticker-track{-webkit-animation-duration:200s;animation-duration:200s}
+  .sticker-track{-webkit-animation-duration:200s;animation-duration:200s}
 }
