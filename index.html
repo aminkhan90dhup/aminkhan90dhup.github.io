@@ -427,13 +427,38 @@ a,button{-webkit-tap-highlight-color:transparent}
     <script>
     (function(){
       var au=document.getElementById('homeAudio'), btn=document.getElementById('bbcPlayBtn'), note=document.getElementById('homeStationNote');
+      // Screen-lock resilience (2026-10-19): playback intent + stall/visibility recovery,
+      // so the live stream reconnects instead of dying a few minutes after the phone locks.
+      var wantPlay=false, pausedWhileHidden=false;
+      function tryPlay(){ try{ var pr=au.play(); if(pr&&pr.catch){ pr.catch(function(){}); } }catch(e){} }
+      function recoverPlayback(){
+        if(!wantPlay || !au.src){ return; }
+        if(au.readyState<2){ try{ au.load(); }catch(e){} }
+        if(au.paused || au.readyState<3){ tryPlay(); }
+      }
+      document.addEventListener('visibilitychange',function(){
+        if(document.visibilityState==='visible' && pausedWhileHidden){
+          pausedWhileHidden=false; // at most one auto-resume per return to the tab
+          recoverPlayback();
+        }
+      });
+      au.addEventListener('stalled',function(){
+        if(wantPlay && (au.paused || au.readyState<3)){ recoverPlayback(); }
+      });
+      try{
+        if('mediaSession' in navigator){
+          navigator.mediaSession.setActionHandler('play',function(){ wantPlay=true; tryPlay(); });
+          navigator.mediaSession.setActionHandler('pause',function(){ try{ au.pause(); }catch(e){} });
+        }
+      }catch(e){}
       function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
-      au.addEventListener('play',function(){ bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); } }catch(e){} });
-      au.addEventListener('pause',function(){ bridge(false); });
+      au.addEventListener('play',function(){ wantPlay=true; bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); navigator.mediaSession.playbackState='playing'; } }catch(e){} });
+      au.addEventListener('pause',function(){ bridge(false); if(document.hidden || document.visibilityState==='hidden'){ pausedWhileHidden=true; } try{ if('mediaSession' in navigator){ navigator.mediaSession.playbackState='paused'; } }catch(e){} });
       au.addEventListener('ended',function(){ bridge(false); });
       btn.onclick=function(){
         if(!au.src){ au.src='https://stream.live.vc.bbcmedia.co.uk/bbc_world_service'; }
-        au.play();
+        wantPlay=true; pausedWhileHidden=false;
+        tryPlay();
         note.textContent='Abhi chal raha hai: 🌍 BBC News — BBC World Service (Live)';
       };
     })();

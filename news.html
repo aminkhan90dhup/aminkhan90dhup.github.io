@@ -307,13 +307,38 @@ a,button{-webkit-tap-highlight-color:transparent}
       ];
       (function(){
         var box=document.getElementById('stationBtns'), au=document.getElementById('liveAudio'), note=document.getElementById('stationNote');
+        // Screen-lock resilience (2026-10-19): playback intent + recovery state.
+        // Chrome throttles a locked/background tab's JS; a big HLS buffer (below) plus
+        // stall/visibility recovery keeps the radio alive instead of dying ~5 min after lock.
+        var wantPlay=false, pausedWhileHidden=false;
+        function tryPlay(){ try{ var pr=au.play(); if(pr&&pr.catch){ pr.catch(function(){}); } }catch(e){} }
+        function recoverPlayback(){
+          if(!wantPlay || !window.__currentStation){ return; }
+          try{ if(window.__hls){ window.__hls.startLoad(); } }catch(e){}
+          if(au.paused || au.readyState<3){ tryPlay(); }
+        }
+        document.addEventListener('visibilitychange',function(){
+          if(document.visibilityState==='visible' && pausedWhileHidden){
+            pausedWhileHidden=false; // at most one auto-resume per return to the tab
+            recoverPlayback();
+          }
+        });
+        au.addEventListener('stalled',function(){
+          if(wantPlay && (au.paused || au.readyState<3)){ recoverPlayback(); }
+        });
+        try{
+          if('mediaSession' in navigator){
+            navigator.mediaSession.setActionHandler('play',function(){ wantPlay=true; tryPlay(); });
+            navigator.mediaSession.setActionHandler('pause',function(){ try{ au.pause(); }catch(e){} });
+          }
+        }catch(e){}
         note.textContent='Apni pasand ka channel chunen — BBC World Service, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge; BBC Asian Network, Instant Radio, PCB Live aur Tamasha un ki apni website par khulenge.';
         // Background playback: tell the Android app (if running inside it) when radio starts/stops,
         // so the app can hold a foreground service and the stream keeps playing while minimized.
         function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
         au.addEventListener('playing',function(){ if(window.__currentStation){ note.textContent='Abhi chal raha hai: '+window.__currentStation; } });
-        au.addEventListener('play',function(){ bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); } }catch(e){} });
-        au.addEventListener('pause',function(){ bridge(false); });
+        au.addEventListener('play',function(){ wantPlay=true; bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); navigator.mediaSession.playbackState='playing'; } }catch(e){} });
+        au.addEventListener('pause',function(){ bridge(false); if(document.hidden || document.visibilityState==='hidden'){ pausedWhileHidden=true; } try{ if('mediaSession' in navigator){ navigator.mediaSession.playbackState='paused'; } }catch(e){} });
         au.addEventListener('ended',function(){ bridge(false); });
         STATIONS.forEach(function(st){
           var b=document.createElement('button');
@@ -321,15 +346,25 @@ a,button{-webkit-tap-highlight-color:transparent}
           b.onclick=function(){
             if(st.link){ window.open(st.link,'_blank','noopener'); note.textContent=st.name+' — nayi tab mein khul gaya hai.'; return; }
             try{ if(window.__hls){ window.__hls.destroy(); window.__hls=null; } }catch(e){}
-            au.style.display=''; window.__currentStation=st.name;
+            au.style.display=''; window.__currentStation=st.name; wantPlay=true; pausedWhileHidden=false;
             note.textContent='Load ho raha hai: '+st.name+' …';
             var playDirect=function(){ au.src=st.url; var pr=au.play(); if(pr&&pr.catch){ pr.catch(function(){ note.textContent='Player ka Play button dabayen: '+st.name; }); } };
             if(st.hls){
               var startHls=function(){
                 if(window.Hls && Hls.isSupported()){
-                  var h=new Hls(); window.__hls=h; h.loadSource(st.url); h.attachMedia(au);
+                  // Big forward buffer (~10 min of audio) so background-tab JS throttling
+                  // after screen lock cannot starve playback; tolerant load retries.
+                  var h=new Hls({maxBufferLength:600, maxMaxBufferLength:1200, backBufferLength:30, liveSyncDurationCount:3, fragLoadingMaxRetry:6, manifestLoadingMaxRetry:3, levelLoadingMaxRetry:4});
+                  window.__hls=h; h.loadSource(st.url); h.attachMedia(au);
+                  var netN=0, medN=0;
                   h.on(Hls.Events.MANIFEST_PARSED,function(){ var pr=au.play(); if(pr&&pr.catch){ pr.catch(function(){ note.textContent='Player ka Play button dabayen: '+st.name; }); } });
-                  h.on(Hls.Events.ERROR,function(ev,data){ if(data&&data.fatal){ note.textContent='Ye channel abhi nahi chal saka — dobara try karen.'; } });
+                  h.on(Hls.Events.FRAG_LOADED,function(){ netN=0; medN=0; });
+                  h.on(Hls.Events.ERROR,function(ev,data){
+                    if(!data || !data.fatal){ return; }
+                    if(data.type===Hls.ErrorTypes.NETWORK_ERROR && netN<4){ netN++; try{ h.startLoad(); }catch(e){} return; }
+                    if(data.type===Hls.ErrorTypes.MEDIA_ERROR && medN<2){ medN++; try{ if(medN===2){ h.swapAudioCodec(); } h.recoverMediaError(); }catch(e){} return; }
+                    note.textContent='Ye channel abhi nahi chal saka — dobara try karen.';
+                  });
                 } else if(au.canPlayType('application/vnd.apple.mpegurl')){ playDirect(); }
                 else { playDirect(); }
               };
