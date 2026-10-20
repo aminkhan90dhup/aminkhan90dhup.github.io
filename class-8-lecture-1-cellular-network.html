@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Lecture 1: Cellular Network — Class 8 CS | Hazrat Amin</title>
+<meta name="description" content="Lecture 1: The cellular network — cells and base stations, the core network (MSC and HLR), how a call works step by step, handover, frequency reuse, and 2G to 5G. Full transcript, notes and exam questions, Class 8 CS.">
+<link rel="canonical" href="https://aminkhan90dhup.github.io/class-8-lecture-1-cellular-network.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HazratAminOfficial">
+<meta property="og:title" content="Lecture 1: Cellular Network — Class 8 CS | Hazrat Amin">
+<meta property="og:description" content="Lecture 1: The cellular network — cells and base stations, the core network (MSC and HLR), how a call works step by step, handover, frequency reuse, and 2G to 5G. Full transcript, notes and exam questions, Class 8 CS.">
+<meta property="og:url" content="https://aminkhan90dhup.github.io/class-8-lecture-1-cellular-network.html">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6QC5L3KB2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q6QC5L3KB2');
+</script>
+<style>
+/* ===== BBC-STYLE REDESIGN (2026-10-19) — white ground, black text, BBC red #B80000 used sparingly.
+   Same class names as before so every section, card and cron-edited block keeps working.
+   Palette lives in CSS variables; the interactive layer's dark/light toggle (data-theme)
+   is honoured by the override block placed after interactive.css in <head>. ===== */
+:root{
+  --bg:#ffffff; --surface:#ffffff; --surface2:#f6f6f6; --ink:#141414; --muted:#595959; --line:#e3e3e3;
+  --green:#141414; --green2:#B80000; --green-light:#f0f0f0; --accent:#7a5200; --accent-bg:#f7e8c3;
+  --red:#B80000; --panel:#141414;
+  --nav-bg:rgba(255,255,255,.97); --shadow:0 1px 3px rgba(0,0,0,.08); --radius:0px;
+  --header-h:118px;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#141414; --surface:#1e1e1e; --surface2:#262626; --ink:#f5f5f5; --muted:#b5b5b5; --line:#3a3a3a; --green:#f5f5f5; --green2:#f0766e; --green-light:#2b2b2b; --accent:#f5c542; --accent-bg:#3a2c07; --red:#e0342f; --panel:#262626; --nav-bg:rgba(20,20,20,.97); --shadow:0 1px 3px rgba(0,0,0,.5);}
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header-h) + 12px)}
+body{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:inherit} img{max-width:100%;display:block}
+h1,h2,h3{line-height:1.15;margin:0} p{margin:0}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+/* Header — BBC masthead + nav bar */
+header{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.masthead{display:flex;align-items:center;gap:16px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-blocks{display:inline-flex;gap:3px;flex:none}
+.brand-blocks i{font-style:normal;background:var(--ink);color:var(--bg);font-weight:800;font-size:19px;line-height:1;padding:7px 9px}
+.brand-name{font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.brand-name small{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.masthead-date{margin-left:auto;text-align:right;line-height:1.3}
+.masthead-date b{display:block;font-size:14.5px;font-weight:700}
+.masthead-date span{font-size:12.5px;color:var(--muted);font-weight:600}
+.masthead .ha-clock{margin-top:0}
+.menu-btn{display:none;background:var(--surface);border:1px solid var(--line);border-radius:0;padding:9px 14px;font-weight:700;cursor:pointer;color:var(--ink);font-family:inherit;margin-left:auto}
+.navrow{border-top:1px solid var(--line)}
+nav.main{display:flex;align-items:center;flex-wrap:wrap;gap:0}
+nav.main>a, .drop-btn{padding:11px 10px;text-decoration:none;font-weight:600;font-size:14px;background:none;border:none;cursor:pointer;color:var(--ink);font-family:inherit;display:inline-flex;align-items:center;gap:5px}
+nav.main>a:hover,.drop-btn:hover{box-shadow:inset 0 -3px 0 var(--red);text-decoration:none}
+.drop{position:relative}
+.drop-panel{position:absolute;top:calc(100% + 8px);left:0;min-width:240px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);padding:8px;display:none;z-index:60}
+.drop.open .drop-panel{display:block}
+.drop-panel a{display:flex;flex-direction:column;gap:1px;padding:10px 12px;text-decoration:none}
+.drop-panel a:hover{background:var(--surface2)}
+.drop-panel a b{font-size:14.5px}.drop-panel a span{font-size:12.5px;color:var(--muted);font-weight:500}
+.caret{font-size:11px;transition:transform .2s}.drop.open .caret{transform:rotate(180deg)}
+.nav-cta{background:var(--ink)!important;color:var(--bg)!important;font-weight:700!important}
+@media(max-width:900px){
+  .masthead-date{display:none}
+  .menu-btn{display:block}
+  .navrow{border-top:none}
+  nav.main{display:none;flex-direction:column;align-items:stretch;padding:6px 0 12px;gap:0}
+  nav.main.show{display:flex}
+  nav.main>a,.drop-btn{width:100%;justify-content:space-between;padding:12px 4px;border-bottom:1px solid var(--line)}
+  nav.main>a:hover,.drop-btn:hover{box-shadow:none;color:var(--red)}
+  .drop-panel{position:static;box-shadow:none;border:none;background:var(--surface2);margin:2px 0 6px}
+}
+/* Lead story block (BBC top stories) */
+.lead-wrap{padding-top:26px;padding-bottom:6px}
+.lead-grid{display:grid;grid-template-columns:2fr 1fr;gap:30px}
+@media(max-width:860px){.lead-grid{grid-template-columns:1fr}}
+.lead-label{display:inline-block;background:var(--red);color:#fff;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px}
+.lead-headline{font-size:clamp(30px,4.6vw,44px);font-weight:800;line-height:1.12;letter-spacing:-.015em;margin:14px 0 12px}
+.lead-headline a{text-decoration:none}
+.lead-headline a:hover{color:var(--red);text-decoration:underline;text-underline-offset:4px}
+.lead-summary{font-size:17px;line-height:1.55;color:var(--ink)}
+.lead-side{display:flex;flex-direction:column}
+.lead-mini{padding:16px 0;border-top:1px solid var(--line)}
+.lead-mini:first-child{padding-top:0;border-top:none}
+.lead-mini img{width:100%;aspect-ratio:16/9;object-fit:cover;margin-bottom:12px}
+.lead-mini h3{font-size:18px;font-weight:800;line-height:1.3;margin-top:8px}
+.lead-mini h3 a{text-decoration:none}
+.lead-mini h3 a:hover{color:var(--red);text-decoration:underline;text-underline-offset:3px}
+.lead-mini p{color:var(--muted);font-size:14px;margin-top:6px}
+.lead-mini .meta{margin-top:8px}
+/* Hero (welcome feature, below the lead block) */
+.hero{position:relative;overflow:hidden;margin-top:26px}
+.hero-img{width:100%;height:520px;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.16) 0%,rgba(0,0,0,.74) 78%)}
+.hero-content{position:absolute;inset:0;display:flex;align-items:flex-end}
+.hero-inner{padding:36px 20px 40px;color:#fff;max-width:760px;width:100%}
+.hero-inner h1{font-size:clamp(38px,6.6vw,62px);font-weight:800;letter-spacing:-.02em}
+.hero-roles{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.hero-roles span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);padding:6px 12px;font-size:13px;font-weight:700}
+.hero-inner p{font-size:17px;color:#f0f0f0;max-width:620px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;font-weight:700;text-decoration:none;font-size:15px;border:1px solid transparent;cursor:pointer;font-family:inherit;border-radius:0}
+.btn-red{background:var(--red);color:#fff}.btn-white{background:#fff;color:#141414}.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.65)}
+.btn-green{background:#141414;color:#fff}
+.btn-outline{background:var(--surface);color:var(--ink);border-color:var(--line)}
+@media(max-width:640px){.hero-img{height:700px}.hero-inner h1{font-size:34px;overflow-wrap:break-word;line-height:1.1}.hero-inner p{font-size:15.5px}.hero-inner{padding-bottom:30px}}
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px auto 0}
+.stat{background:var(--surface);border:1px solid var(--line);padding:18px}
+.stat b{font-size:22px;display:block}.stat span{font-size:13px;color:var(--muted);font-weight:600}
+@media(max-width:800px){.stats{grid-template-columns:1fr 1fr}}
+/* Sections — BBC blocks: red kicker, bold black header, hairline rule */
+main>section{border-top:1px solid var(--line);margin-top:34px}
+section{padding:26px 0 8px}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+section h2{font-weight:800;font-size:clamp(24px,3.4vw,30px);letter-spacing:-.01em;margin:6px 0 8px}
+.lead{color:var(--muted);max-width:700px;font-size:16.5px}
+.lead a{font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:10px}
+.card h3{font-size:18px;font-weight:800;line-height:1.3}.card p{color:var(--muted);font-size:14.5px;flex:1}
+.tag{align-self:flex-start;font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:5px 9px;background:var(--red);color:#fff}
+.tag.amber{background:var(--accent-bg);color:var(--accent)}
+.card a.more{font-weight:700;text-decoration:none;color:var(--ink);font-size:14.5px}
+.card a.more:hover{color:var(--red);text-decoration:underline;text-underline-offset:3px}
+.meta{font-size:12.5px;color:var(--muted);font-weight:600}
+/* Filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{padding:8px 14px;border:1px solid var(--line);background:var(--surface);font-weight:700;font-size:13.5px;cursor:pointer;color:var(--ink);font-family:inherit;border-radius:0}
+.chip.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.hidden{display:none!important}
+/* Featured panel */
+.featured{margin-top:22px;background:var(--panel);color:#fff;padding:28px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+@media(max-width:760px){.featured{grid-template-columns:1fr}}
+.featured h3{font-weight:800;font-size:28px}
+.featured p{color:#d8d8d8;margin-top:8px}
+.playbox{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);padding:20px;text-align:center}
+.play{width:64px;height:64px;border-radius:50%;background:#fff;color:#141414;display:grid;place-items:center;font-size:24px;margin:0 auto 10px}
+/* Valley */
+.valley-hero{overflow:hidden;margin-top:22px;position:relative}
+.valley-hero img{width:100%;height:340px;object-fit:cover}
+.valley-hero figcaption{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.75));font-weight:600}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+@media(max-width:800px){.gallery{grid-template-columns:1fr 1fr}}
+.gallery figure{margin:0;overflow:hidden;position:relative;cursor:pointer;border:1px solid var(--line)}
+.gallery img{width:100%;height:190px;object-fit:cover;transition:transform .3s}
+.gallery figure:hover img{transform:scale(1.04)}
+.gallery figcaption{position:absolute;bottom:0;left:0;right:0;padding:22px 12px 10px;color:#fff;font-size:13px;font-weight:700;background:linear-gradient(transparent,rgba(0,0,0,.65))}
+/* About / Contact */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.about-card{background:var(--surface);border:1px solid var(--line);padding:24px}
+.about-card ul{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+.contact-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:100;display:none;place-items:center;padding:20px}
+.lightbox.open{display:grid}
+.lightbox img{max-height:82vh}
+.lightbox button{position:absolute;top:18px;right:18px;background:#fff;border:none;padding:10px 16px;font-weight:800;cursor:pointer;font-family:inherit}
+.lightbox p{color:#fff;text-align:center;margin-top:12px;font-weight:600}
+/* Footer — dark charcoal, BBC style */
+footer{margin-top:56px;background:#141414;color:#d6d6d6;padding:34px 0 44px;font-size:14px}
+footer .cols{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between}
+footer a{text-decoration:none;font-weight:600;color:#fff}
+footer a:hover{text-decoration:underline}
+footer b{color:#fff!important}
+#topBtn{position:fixed;right:16px;bottom:16px;z-index:60;width:46px;height:46px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);cursor:pointer;font-size:18px;color:var(--ink);display:none;border-radius:0}
+.notice{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--red);padding:18px;color:var(--muted);font-size:14.5px;margin-top:16px}
+
+/* MOBILE-FRIENDLY-PASS (2026-10-04) */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:clip;-webkit-tap-highlight-color:transparent}
+img,video,iframe,svg{max-width:100%}
+p,a,h1,h2,h3,li,figcaption{overflow-wrap:break-word}
+a,button{-webkit-tap-highlight-color:transparent}
+.lightbox img{max-width:100%;height:auto}
+@media(max-width:640px){
+  .wrap{padding:0 16px}
+  section{padding:20px 0 4px}
+  .card{padding:16px}
+  .about-card{padding:18px}
+  .featured{padding:20px}
+  .notice{padding:14px}
+  .btn{min-height:46px;justify-content:center}
+  .hero-btns .btn{flex:1 1 auto}
+  .chip{min-height:42px;padding:9px 15px}
+  nav.main>a,.drop-btn{min-height:48px;align-items:center}
+  .drop-panel a{padding:12px;min-height:48px}
+  .contact-row .btn{flex:1 1 100%}
+  .hero-img{height:min(540px,82vh)}
+  .valley-hero img{height:230px}
+  .gallery{gap:9px}
+  .gallery img{height:150px}
+  .gallery figcaption{font-size:12px;padding:18px 9px 8px}
+  .stats{gap:9px;margin-top:16px}
+  .stat{padding:13px}
+  .stat b{font-size:19px}
+  footer .cols{flex-direction:column;gap:16px}
+  #topBtn{right:12px;bottom:calc(12px + env(safe-area-inset-bottom))}
+  .brand-name{font-size:16px}
+  .lead-headline{font-size:29px}
+}
+@media(max-width:380px){
+  .gallery{grid-template-columns:1fr 1fr}
+  .hero-inner h1{font-size:30px}
+  .stats{grid-template-columns:1fr 1fr}
+}
+</style>
+<link rel="stylesheet" href="interactive.css">
+<link rel="stylesheet" href="mobile.css">
+<style>
+/* BBC redesign — theme tokens for the interactive dark/light toggle (data-theme).
+   Placed after interactive.css so the toggle keeps the BBC palette in both modes;
+   the interactive.css / interactive.js link tags themselves are unchanged. */
+:root[data-theme="light"]{--bg:#ffffff;--surface:#ffffff;--surface2:#f6f6f6;--ink:#141414;--muted:#595959;--line:#e3e3e3;--green:#141414;--green2:#B80000;--green-light:#f0f0f0;--accent:#7a5200;--accent-bg:#f7e8c3;--red:#B80000;--panel:#141414;--nav-bg:rgba(255,255,255,.97);--shadow:0 1px 3px rgba(0,0,0,.08)}
+:root[data-theme="dark"]{--bg:#141414;--surface:#1e1e1e;--surface2:#262626;--ink:#f5f5f5;--muted:#b5b5b5;--line:#3a3a3a;--green:#f5f5f5;--green2:#f0766e;--green-light:#2b2b2b;--accent:#f5c542;--accent-bg:#3a2c07;--red:#e0342f;--panel:#262626;--nav-bg:rgba(20,20,20,.97);--shadow:0 1px 3px rgba(0,0,0,.5)}
+</style>
+<script type="application/ld+json" data-seo-schema="2026-10-17">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://aminkhan90dhup.github.io/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Class 8 Computer Science Lectures",
+     "item": "https://aminkhan90dhup.github.io/class-8-computer-science.html"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Lecture 1: Cellular Network — Class 8 CS",
+     "item": "https://aminkhan90dhup.github.io/class-8-lecture-1-cellular-network.html"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "headline": "Lecture 1: Cellular Network — Class 8 CS",
+   "description": "Lecture 1: The cellular network — cells and base stations, the core network (MSC and HLR), how a call works step by step, handover, frequency reuse, and 2G to 5G. Full transcript, notes and exam questions, Class 8 CS.",
+   "url": "https://aminkhan90dhup.github.io/class-8-lecture-1-cellular-network.html",
+   "datePublished": "2026-10-20",
+   "author": {
+    "@id": "https://aminkhan90dhup.github.io/#person"
+   },
+   "publisher": {
+    "@id": "https://aminkhan90dhup.github.io/#person"
+   },
+   "inLanguage": "en"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+  <div class="wrap nav masthead">
+    <a class="brand" href="/"><span class="brand-blocks" aria-hidden="true"><i>H</i><i>A</i></span><span class="brand-name">HazratAminOfficial<small>Jijal • Lower Kohistan</small></span></a>
+    <div class="masthead-date"><b id="mastheadDate">Tuesday, 20 October 2026</b><span>Pakistan • Khyber Pakhtunkhwa</span></div>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false">☰ Menu</button>
+  </div>
+  <div class="wrap navrow">
+    <nav class="main" id="mainNav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a class="drop-btn" href="class-6-computer-science.html">Lectures</a>
+      <a class="drop-btn" href="news.html">News &amp; Tech</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="sports.html">Sports</a>
+      <a href="weather.html">Weather</a>
+      <a href="youtube.html">YouTube</a>
+      <a href="fiverr.html">Fiverr</a>
+      <a href="apps.html">Apps &amp; AI</a>
+      <a href="shop.html">Shop</a>
+      <a href="events.html">Events</a>
+      <a class="drop-btn" href="valley.html">My Valley</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
+<script>(function(){try{var el=document.getElementById('mastheadDate');if(el){el.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Karachi',weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());}}catch(e){}})();</script>
+<main class="wrap">
+<div class="kicker">Lectures by Hazrat Amin • Class 8</div>
+<h1>Lecture 1: Cellular Network</h1>
+<p class="lead">Your phone connects to a network of small cells, each with its own tower. The core network — the brain of the system — joins your call, handover keeps it alive while you move, and frequency reuse lets millions of people talk at the same time.</p>
+<div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/eNNr9GsPJpg" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
+<h3>What you will learn</h3>
+<ul>
+  <li>The coverage area is divided into small hexagonal areas called <b>cells</b> (like a honeycomb). Each cell has a tower — a <b>Base Station (BTS)</b> — at its centre, and your phone connects by radio waves to the nearest cell's tower.</li>
+  <li>The three main parts: the <b>Mobile Station</b> (your phone + SIM; the SIM carries a unique number, IMSI, that is your identity), the <b>Base Station</b> (the tower), and the <b>Core Network</b> (its main switch, the MSC, is the brain — it checks the HLR register to confirm the SIM is genuine and has balance/package).</li>
+  <li>How a call works: you dial → the signal goes to your nearest tower → the core network verifies your SIM and finds the tower nearest to the other person → that tower <i>pages</i> the other phone — it rings, and the call begins.</li>
+  <li><b>Handover</b>: when you move from one cell into another, the system automatically hands your connection to the new tower — the call continues and you never notice the switch.</li>
+  <li><b>Frequency reuse</b>: the same frequency used in one cell is reused in a far-away cell without interference — this trick allows millions of people to call at the same time.</li>
+  <li>Generations: <b>2G</b> calls + SMS only; <b>3G</b> calls + slow internet; <b>4G (LTE)</b> fast internet; <b>5G</b> extremely fast with very low delay.</li>
+  <li>Why the signal gets weak: distance from the tower, obstacles in between (mountains and walls), or too many users on one tower at the same time.</li>
+</ul>
+<h3>Full transcript</h3>
+<p>Assalam-o-Alaikum, dear students! Welcome to Computer Science, Class Eight. I am your teacher, Hazrat Amin. Today we start a brand new topic: the cellular network. Every day, millions of people talk on their mobile phones — but have you ever wondered how your voice travels through the air and reaches your friend's phone? In this lecture, we will discover the answer, step by step.</p>
+<p>First, why is it called a cellular network? The whole coverage area is divided into small areas called cells — like the cells of a honeycomb made by bees. In the middle of every cell there is a tower, called a base station. Your phone does not connect to one big tower far away. It connects, through radio waves, to the tower of the cell where you are standing. And when you move to another area, your cell changes too!</p>
+<p>A cellular system has three main parts. Part one: the mobile station — that is your phone and your SIM. Your SIM carries a special number called IMSI, which is your identity on the network. Part two: the base station — the tower that receives your phone's radio signals and passes them on. Part three: the core network. Its main switch, the MSC, is the brain of the system. It checks a register called the HLR, to make sure your SIM is real and has balance or a package.</p>
+<p>Now, how does a call work? Step one: you dial your friend's number, and your phone sends the signal to your nearest tower. Step two: the core network checks your SIM, and searches for the tower nearest to your friend. Step three: that tower calls out to your friend's phone — we say it pages the phone — and your friend's phone starts ringing. Your friend answers, and now your voices travel between the towers, through the core network. The whole journey takes less than a second!</p>
+<p>But what happens when you are travelling in a bus, talking on the phone? You pass out of one cell and into the next cell. Does the call break? No! The system quietly hands your connection over to the new tower. This is called handover. The new tower takes over, the old tower lets go, and your call continues without any break at all. You never even notice that your tower has changed — the system does everything by itself, in a fraction of a second.</p>
+<p>Now, a clever trick: frequency reuse. Every tower can use only a small set of radio frequencies, and there are not enough frequencies for every tower to have its own separate set. So, the same frequency is used again in another cell, far away. Because those cells are far apart, their signals never disturb each other. Thanks to this reuse, millions of people can talk at the same time, in the same city, on the same small set of frequencies. This clever trick is the heart of the cellular idea!</p>
+<p>Mobile networks have grown through generations. 2G, the second generation, gave us calls and SMS messages — nothing more. 3G added the internet, but it was slow. 4G, also called LTE, brought fast internet: videos, games and video calls — and even our voice now travels as data. And 5G, the newest generation, is extremely fast, with almost no delay at all. Each new generation makes the network faster, and able to serve many more people at the same time.</p>
+<p>Finally, why does the signal sometimes get weak? There are three reasons. One: you are far away from the tower. Two: something blocks the radio waves — walls, and in our area, the big mountains of Kohistan. Three: too many people are using the same tower at the same time. Let us revise: a network of small cells, each with its own tower; the core network is the brain; handover keeps our calls alive while we move; and frequency reuse lets millions talk at once. In the next lecture, we will learn how mobile internet works. Goodbye, and keep learning!</p>
+<h3>Exam questions — test yourself</h3>
+<p><b>Q1.</b> Why is a mobile network called "cellular"?</p><ul style="list-style:none"><li>a) Because the phone has a battery cell</li><li>b) Because the coverage area is divided into small areas called cells</li><li>c) Because the towers look like a honeycomb</li><li>d) Because it sells phones</li></ul><p><b>Q2.</b> The special number on your SIM that is your identity on the network is called:</p><ul style="list-style:none"><li>a) MSC</li><li>b) HLR</li><li>c) IMSI</li><li>d) BTS</li></ul><p><b>Q3.</b> When you move from one cell into another during a call, the system hands your connection to the new tower. This is called:</p><ul style="list-style:none"><li>a) Frequency reuse</li><li>b) Paging</li><li>c) Handover</li><li>d) Roaming</li></ul><p><b>Q4.</b> Name the three main parts of a cellular system and write one line about each.</p><p><b>Q5.</b> Write three reasons why the mobile signal gets weak.</p>
+<details><summary><b>Answers — click to check</b></summary>
+<p><b>Q1:</b> Because the coverage area is divided into small areas called cells</p><p><b>Q2:</b> IMSI</p><p><b>Q3:</b> Handover</p><p><b>Q4:</b> (1) Mobile station — your phone and SIM; the SIM's IMSI number is your identity on the network. (2) Base station — the tower in each cell that receives your phone's radio signals. (3) Core network — the brain of the system; its main switch (MSC) decides where a call goes and checks the HLR register to confirm the SIM is genuine.</p><p><b>Q5:</b> (1) You are far away from the tower. (2) Obstacles block the radio waves — walls, and in our area the big mountains. (3) Too many people are using the same tower at the same time.</p>
+</details>
+<p style="margin-top:22px;display:flex;gap:18px;flex-wrap:wrap"><span>This is Lecture 1 of the Class 8 series</span> · <span>Next lecture coming soon: How Mobile Internet Works</span></p>
+<p><a href="class-8-computer-science.html">📚 All Class 8 lectures</a></p>
+</main>
+<footer><div class="wrap">
+  <p>© 2026 Hazrat Amin — HazratAminOfficial · GHS Jijal, Lower Kohistan</p>
+</div></footer>
+<script src="interactive.js" defer></script>
+<script>
+// Mobile menu
+var menuBtn=document.getElementById('menuBtn'), mainNav=document.getElementById('mainNav');
+if(menuBtn&&mainNav){menuBtn.addEventListener('click',function(){var open=mainNav.classList.toggle('show');menuBtn.setAttribute('aria-expanded',open);});}
+</script>
+</body>
+</html>
