@@ -300,7 +300,7 @@ a,button{-webkit-tap-highlight-color:transparent}
         {name:'\u{1F3B5} Hum FM 106 — Urdu Music (Pakistan)', url:'https://funasia.streamguys1.com/live4'},
         {name:'\u{1F3B6} Radio Mirchi 98.3 — Bollywood Hindi', url:'https://playerservices.streamtheworld.com/api/livestream-redirect/NJS_HIN_ESTAAC.aac'},
         {name:'\u{1F4FB} Vividh Bharati — Hindi Classic Songs', url:'https://air.pc.cdn.bitgravity.com/air/live/pbaudio001/playlist.m3u8', hls:true},
-        {name:'\u{1F399} Power99 FM 99.0 — Islamabad (Pakistan)', url:'https://stream.zeno.fm/xh2e8vsz1uquv'},
+        {name:'\u{1F399} Power99 FM 99.0 — Islamabad (Pakistan)', link:'https://power99.live/en/listen'},
         {name:'\u{1F3A7} BBC Asian Network — Live Radio', link:'https://www.bbc.co.uk/sounds/play/live:bbc_asian_network'},
         {name:'\u{1F4FB} Instant Radio — Website', link:'https://instant.radio/'},
         {name:'\u{1F3CF} PCB Live — Official Match Stream', link:'https://live.pcb.com.pk/home'},
@@ -333,7 +333,7 @@ a,button{-webkit-tap-highlight-color:transparent}
             navigator.mediaSession.setActionHandler('pause',function(){ try{ au.pause(); }catch(e){} });
           }
         }catch(e){}
-        note.textContent='Apni pasand ka channel chunen — BBC World Service, Hum FM 106, Radio Mirchi 98.3, Vividh Bharati aur Power99 FM 99.0 yahin isi player mein chalenge; BBC Asian Network, Instant Radio, PCB Live aur Tamasha un ki apni website par khulenge.';
+        note.textContent='Apni pasand ka channel chunen — BBC World Service, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge; BBC Asian Network, Instant Radio, PCB Live, Tamasha aur Power99 FM 99.0 un ki apni website par khulenge.';
         // Background playback: tell the Android app (if running inside it) when radio starts/stops,
         // so the app can hold a foreground service and the stream keeps playing while minimized.
         function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
