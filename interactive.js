@@ -91,7 +91,7 @@ if(mc){
    ['2026-10-25T14:30:00+05:00','Pakistan vs England — ODI Tri-Series','Gaddafi Stadium, Lahore'],
    ['2026-10-27T14:30:00+05:00','Pakistan vs Sri Lanka — ODI Tri-Series','Gaddafi Stadium, Lahore'],
    ['2026-10-29T14:30:00+05:00','Sri Lanka vs England — ODI Tri-Series','Gaddafi Stadium, Lahore'],
-   ['2026-10-31T14:30:00+05:00','ODI Tri-Series FINAL','Gaddafi Stadium, Lahore'],
+   ['2026-10-31T14:30:00+05:00','Pakistan vs Sri Lanka — ODI Tri-Series FINAL','Gaddafi Stadium, Lahore'],
    ['2026-11-09T10:30:00+05:00','Pakistan vs Sri Lanka — 1st Test','Rawalpindi Cricket Stadium'],
    ['2026-11-17T10:30:00+05:00','Pakistan vs Sri Lanka — 2nd Test','Gaddafi Stadium, Lahore']];
   mc.innerHTML='<h3>🏏 Match Centre</h3><div class="mc-next"></div><div class="mc-count"></div><div class="mc-tabs"><button class="mc-tab active" data-f="all">All matches</button><button class="mc-tab" data-f="T20I">T20I</button><button class="mc-tab" data-f="ODI">ODI Tri-Series</button><button class="mc-tab" data-f="Test">Tests</button></div>';
