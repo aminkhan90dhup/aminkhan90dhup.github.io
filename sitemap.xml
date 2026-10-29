@@ -8,7 +8,7 @@
   </url>
   <url>
     <loc>https://aminkhan90dhup.github.io/class-6-computer-science.html</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -32,13 +32,19 @@
   </url>
   <url>
     <loc>https://aminkhan90dhup.github.io/class-8-computer-science.html</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://aminkhan90dhup.github.io/class-8-lecture-1-cellular-network.html</loc>
     <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aminkhan90dhup.github.io/class-8-lecture-natural-artificial-satellites.html</loc>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

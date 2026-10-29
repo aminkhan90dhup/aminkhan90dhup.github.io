@@ -39,6 +39,7 @@ var INDEX=[
 ['Lecture 3 — Input and Output Devices','class-6-lecture-3-input-output-devices.html','lecture 3 input output devices keyboard mouse'],
 ['Lectures — Class 8 Computer Science','class-8-computer-science.html','lectures class 8 computer science'],
 ['Lecture 1 — Cellular Network','class-8-lecture-1-cellular-network.html','lecture 1 cellular network mobile tower handover frequency reuse'],
+['Natural & Artificial Satellites','class-8-lecture-natural-artificial-satellites.html','satellites moon sputnik leo meo geo orbit lecture class 8'],
 ['News & Tech','news.html','news tech ai technology khabar'],
 ['Breaking: KP Emergency & Arrests','news.html','breaking news emergency khyber pakhtunkhwa sohail afridi junaid akbar arrested governor rule'],
 ['Jobs — Latest ETEA & NTS Jobs','jobs.html','jobs nokri etea nts vacancy'],
