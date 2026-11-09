@@ -32,7 +32,7 @@
   </url>
   <url>
     <loc>https://aminkhan90dhup.github.io/class-8-computer-science.html</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -50,18 +50,10 @@
   </url>
   <url>
     <loc>https://aminkhan90dhup.github.io/jobs.html</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <url>
-    <loc>https://aminkhan90dhup.github.io/job-gepco-nts.html</loc>
-    <lastmod>2026-10-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
   <url>
     <loc>https://aminkhan90dhup.github.io/news.html</loc>
     <lastmod>2026-11-08</lastmod>
@@ -243,12 +235,16 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://aminkhan90dhup.github.io/class-8-unit1-networks.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url><url><loc>https://aminkhan90dhup.github.io/class-8-unit2-spreadsheets.html</loc><lastmod>2026-11-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <loc>https://aminkhan90dhup.github.io/class-8-unit1-networks.html</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-    <loc>https://aminkhan90dhup.github.io/job-szabist-ms-special-test-nts.html</loc>
-    <lastmod>2026-11-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://aminkhan90dhup.github.io/class-8-unit2-spreadsheets.html</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aminkhan90dhup.github.io/job-gepco-balochistan-quota-nts.html</loc>
