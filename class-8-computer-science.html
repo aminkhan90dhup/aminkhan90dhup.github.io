@@ -106,6 +106,12 @@ nav.main>a:hover,.drop-btn:hover{box-shadow:inset 0 -3px 0 var(--red);text-decor
 .btn-red{background:var(--red);color:#fff}.btn-white{background:#fff;color:#141414}.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.65)}
 .btn-green{background:#141414;color:#fff}
 .btn-outline{background:var(--surface);color:var(--ink);border-color:var(--line)}
+/* CTA buttons (2026-11-11) — blue/green lecture buttons; BBC red/black theme otherwise untouched */
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.cta-row .btn{border-radius:6px}
+.cta-btn-blue{background:#1565C0;color:#fff}
+.cta-btn-green{background:#2E7D32;color:#fff}
+@media(max-width:640px){.cta-row .btn{flex:1 1 100%}}
 @media(max-width:640px){.hero-img{height:700px}.hero-inner h1{font-size:34px;overflow-wrap:break-word;line-height:1.1}.hero-inner p{font-size:15.5px}.hero-inner{padding-bottom:30px}}
 /* Stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px auto 0}
@@ -170,6 +176,10 @@ footer a{text-decoration:none;font-weight:600;color:#fff}
 footer a:hover{text-decoration:underline}
 footer b{color:#fff!important}
 #topBtn{position:fixed;right:16px;bottom:16px;z-index:60;width:46px;height:46px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);cursor:pointer;font-size:18px;color:var(--ink);display:none;border-radius:0}
+/* WhatsApp floating button (2026-11-11) */
+.wa-float{position:fixed;right:16px;bottom:76px;z-index:70;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;font-size:28px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.wa-float:hover{background:#1eb856}
+@media(max-width:640px){.wa-float{right:12px;bottom:calc(76px + env(safe-area-inset-bottom))}}
 .notice{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--red);padding:18px;color:var(--muted);font-size:14.5px;margin-top:16px}
 
 /* MOBILE-FRIENDLY-PASS (2026-10-04) */
@@ -289,21 +299,29 @@ a,button{-webkit-tap-highlight-color:transparent}
   <h3>Lecture 1: Cellular Network</h3>
   <p>How does your voice travel through the air to your friend's phone? Meet the cells and towers of the mobile network, the core network — its brain — plus handover, frequency reuse, and the journey from 2G to 5G.</p>
   <div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/eNNr9GsPJpg" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
-  <a class="more" href="class-8-lecture-1-cellular-network.html">Notes, transcript &amp; exam questions →</a>
+  <div class="cta-row"><a class="btn cta-btn-blue" href="class-8-lecture-1-cellular-network.html#video">🎥 Watch Video</a><a class="btn cta-btn-green" href="class-8-lecture-1-cellular-network.html#notes">📝 Notes &amp; Questions</a></div>
 </article>
 <article class="card" style="margin-bottom:20px">
   <span class="tag">Class 8 • Video Lecture</span>
   <h3>Natural &amp; Artificial Satellites</h3>
   <p>What is a satellite, and where do satellites live? The Moon as Earth's natural satellite, Sputnik 1 and today's artificial satellites, and the three orbits — LEO, MEO and GEO — explained with animation, Urdu narration and Urdu subtitles.</p>
   <div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/N80zUAk-w4I" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
-  <a class="more" href="class-8-lecture-natural-artificial-satellites.html">Notes, transcript &amp; exam questions →</a>
+  <div class="cta-row"><a class="btn cta-btn-blue" href="class-8-lecture-natural-artificial-satellites.html#video">🎥 Watch Video</a><a class="btn cta-btn-green" href="class-8-lecture-natural-artificial-satellites.html#notes">📝 Notes &amp; Questions</a></div>
 </article>
 <article class="card" style="margin-bottom:20px">
   <span class="tag">Class 8 • Video Lecture</span>
   <h3>Unit 1: Computer Networks and Emerging Technologies</h3>
   <p>LAN vs WAN, benefits of networks, the network switch, wired vs wireless — plus robots, distributed applications, blockchain, 3D holographic imaging, and generative AI vs agentic AI. English narration with Urdu subtitles.</p>
   <div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/ewo_YJ6DOZM" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
-  <a class="more" href="class-8-unit1-networks.html">Notes &amp; exam questions →</a></article><article class="card" style="margin-bottom:20px"><span class="tag">Class 8 • Video Lecture</span><h3>Unit 2: Spreadsheet Applications</h3><p>Spreadsheet Applications — SUM, AVERAGE, MAX and MIN functions, plus bar charts. Q1 SUM F5, Q2 SUM F7, Q3 AVERAGE G7, Q4 MAX D10, Q5 MIN E11, Q6 bar chart of averages. English narration with Urdu subtitles.</p><div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/vNadjoyrUhA" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div><a class="more" href="class-8-unit2-spreadsheets.html">Notes &amp; exam questions →</a></article>
+  <div class="cta-row"><a class="btn cta-btn-blue" href="class-8-unit1-networks.html#video">🎥 Watch Video</a><a class="btn cta-btn-green" href="class-8-unit1-networks.html#notes">📝 Notes &amp; Questions</a></div>
+</article>
+<article class="card" style="margin-bottom:20px">
+  <span class="tag">Class 8 • Video Lecture</span>
+  <h3>Unit 2: Spreadsheet Applications</h3>
+  <p>SUM, AVERAGE, MAX and MIN formulas worked on cricket scores — totals and averages in F5, F7 and G7, the best and lowest scores with MAX and MIN, plus a bar chart of the averages. English narration with Urdu subtitles.</p>
+  <div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/vNadjoyrUhA" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
+  <div class="cta-row"><a class="btn cta-btn-blue" href="class-8-unit2-spreadsheets.html#video">🎥 Watch Video</a><a class="btn cta-btn-green" href="class-8-unit2-spreadsheets.html#notes">📝 Notes &amp; Questions</a></div>
+</article>
 <p><a href="/">← Back to home</a></p>
 </main>
 <footer><div class="wrap">
@@ -315,5 +333,6 @@ a,button{-webkit-tap-highlight-color:transparent}
 var menuBtn=document.getElementById('menuBtn'), mainNav=document.getElementById('mainNav');
 if(menuBtn&&mainNav){menuBtn.addEventListener('click',function(){var open=mainNav.classList.toggle('show');menuBtn.setAttribute('aria-expanded',open);});}
 </script>
+<a class="wa-float" href="https://wa.me/923428279613" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
 </body>
 </html>

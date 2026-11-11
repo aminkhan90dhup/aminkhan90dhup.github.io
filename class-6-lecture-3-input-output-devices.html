@@ -106,6 +106,12 @@ nav.main>a:hover,.drop-btn:hover{box-shadow:inset 0 -3px 0 var(--red);text-decor
 .btn-red{background:var(--red);color:#fff}.btn-white{background:#fff;color:#141414}.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.65)}
 .btn-green{background:#141414;color:#fff}
 .btn-outline{background:var(--surface);color:var(--ink);border-color:var(--line)}
+/* CTA buttons (2026-11-11) — blue/green lecture buttons; BBC red/black theme otherwise untouched */
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.cta-row .btn{border-radius:6px}
+.cta-btn-blue{background:#1565C0;color:#fff}
+.cta-btn-green{background:#2E7D32;color:#fff}
+@media(max-width:640px){.cta-row .btn{flex:1 1 100%}}
 @media(max-width:640px){.hero-img{height:700px}.hero-inner h1{font-size:34px;overflow-wrap:break-word;line-height:1.1}.hero-inner p{font-size:15.5px}.hero-inner{padding-bottom:30px}}
 /* Stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px auto 0}
@@ -296,7 +302,8 @@ a,button{-webkit-tap-highlight-color:transparent}
 <div class="kicker">Lectures by Hazrat Amin • Class 6 • New KP Syllabus</div>
 <h1>Lecture 3: Input and Output Devices</h1>
 <p class="lead">Input devices send information INTO the computer; output devices bring the result OUT. Keyboard, mouse and scanner on one side — monitor, speakers and printer on the other — made simple.</p>
-<div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/nvFjYXIshxA" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
+<div class="cta-row"><a class="btn cta-btn-blue" href="#video">🎥 Watch Video</a><a class="btn cta-btn-green" href="#notes">📝 Notes</a><a class="btn btn-outline" href="#questions">❓ Exam Questions</a></div>
+<div id="video" style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/nvFjYXIshxA" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
 <h3>What you will learn</h3>
 <ul>
   <li>An input device is a part of the computer that sends information INTO the computer — like our mouth when we speak, it gives the computer something to work on.</li>
@@ -306,14 +313,14 @@ a,button{-webkit-tap-highlight-color:transparent}
   <li>Monitor: shows us pictures, words and videos. Speakers and headphones: give us sound and music. Printer: gives us our work on paper.</li>
   <li>Remember: input goes in, output comes out!</li>
 </ul>
-<h3>Full transcript</h3>
+<h3 id="notes">Full transcript</h3>
 <p>Assalam-o-Alaikum, dear students! Welcome back to Computer Science, Class Six. I am your teacher, Hazrat Amin. In the last lesson, we learned about the microprocessor — the brain of the computer. Today we will learn about input and output devices.</p>
 <p>First, what is an input device? An input device is a part of the computer that sends information INTO the computer. It is like our mouth when we speak — we give the computer something to work on.</p>
 <p>Examples of input devices. The keyboard sends letters and numbers when we type. The mouse sends our clicks and movements. The scanner sends a photo or a page into the computer. The microphone sends our voice, and the webcam sends our picture.</p>
 <p>Now, what is an output device? An output device brings information OUT of the computer, so that we can see it, hear it, or hold it in our hands. It is the computer talking back to us.</p>
 <p>Examples of output devices. The monitor shows us pictures, words and videos. The speakers and headphones give us sound and music. The printer gives us our work on paper. Remember: input goes in, output comes out!</p>
 <p>Let us revise. Input devices — keyboard, mouse, scanner, microphone — send information into the computer. Output devices — monitor, speakers, printer — bring the result out for us. In the next lesson, we will learn about the system unit and its parts. Goodbye, and keep learning!</p>
-<h3>Exam questions — test yourself</h3>
+<h3 id="questions">Exam questions — test yourself</h3>
 <p><b>Q1.</b> Which of these is an input device?</p><ul style="list-style:none"><li>a) Monitor</li><li>b) Printer</li><li>c) Scanner</li><li>d) Speakers</li></ul><p><b>Q2.</b> A microphone sends ___ into the computer.</p><ul style="list-style:none"><li>a) Pictures on paper</li><li>b) Our voice</li><li>c) Printed pages</li><li>d) Light</li></ul><p><b>Q3.</b> Which device gives us our work on paper?</p><ul style="list-style:none"><li>a) Keyboard</li><li>b) Webcam</li><li>c) Monitor</li><li>d) Printer</li></ul><p><b>Q4.</b> Define input device and output device, with two examples of each.</p><p><b>Q5.</b> "Input goes in, output comes out." Explain this line using a keyboard and a monitor.</p>
 <details><summary><b>Answers — click to check</b></summary>
 <p><b>Q1:</b> Scanner</p><p><b>Q2:</b> Our voice</p><p><b>Q3:</b> Printer</p><p><b>Q4:</b> An input device sends information INTO the computer (examples: keyboard, mouse). An output device brings information OUT of the computer so we can see it, hear it or hold it (examples: monitor, printer).</p><p><b>Q5:</b> When we type on the keyboard, letters go INTO the computer — so the keyboard is an input device. The monitor shows us the result that comes OUT of the computer — so the monitor is an output device. Input goes in, output comes out.</p>

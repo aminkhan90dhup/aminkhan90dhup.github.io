@@ -106,6 +106,12 @@ nav.main>a:hover,.drop-btn:hover{box-shadow:inset 0 -3px 0 var(--red);text-decor
 .btn-red{background:var(--red);color:#fff}.btn-white{background:#fff;color:#141414}.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.65)}
 .btn-green{background:#141414;color:#fff}
 .btn-outline{background:var(--surface);color:var(--ink);border-color:var(--line)}
+/* CTA buttons (2026-11-11) — blue/green lecture buttons; BBC red/black theme otherwise untouched */
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.cta-row .btn{border-radius:6px}
+.cta-btn-blue{background:#1565C0;color:#fff}
+.cta-btn-green{background:#2E7D32;color:#fff}
+@media(max-width:640px){.cta-row .btn{flex:1 1 100%}}
 @media(max-width:640px){.hero-img{height:700px}.hero-inner h1{font-size:34px;overflow-wrap:break-word;line-height:1.1}.hero-inner p{font-size:15.5px}.hero-inner{padding-bottom:30px}}
 /* Stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px auto 0}
@@ -296,7 +302,8 @@ a,button{-webkit-tap-highlight-color:transparent}
 <div class="kicker">Lectures by Hazrat Amin • Class 6 • New KP Syllabus</div>
 <h1>Lecture 2: Microprocessor — The Brain of the Computer</h1>
 <p class="lead">The microprocessor — also called the CPU — is the brain of the computer. Learn its three main jobs: calculating, making decisions, and controlling every part of the computer.</p>
-<div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/FO6Ew4yukcM" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
+<div class="cta-row"><a class="btn cta-btn-blue" href="#video">🎥 Watch Video</a><a class="btn cta-btn-green" href="#notes">📝 Notes</a><a class="btn btn-outline" href="#questions">❓ Exam Questions</a></div>
+<div id="video" style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/FO6Ew4yukcM" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
 <h3>What you will learn</h3>
 <ul>
   <li>A microprocessor is a small electronic chip inside the computer.</li>
@@ -307,14 +314,14 @@ a,button{-webkit-tap-highlight-color:transparent}
   <li>It sits inside the system unit, on the motherboard.</li>
   <li>It works super fast — it can do millions of small jobs in just one second.</li>
 </ul>
-<h3>Full transcript</h3>
+<h3 id="notes">Full transcript</h3>
 <p>Assalam-o-Alaikum, dear students! Welcome back to Computer Science, Class Six. I am your teacher, Hazrat Amin. In the last lesson, we learned about hardware and software. Today we will learn about the microprocessor — the brain of the computer.</p>
 <p>What is a microprocessor? A microprocessor is a small electronic chip inside the computer. It is also called the C P U — the Central Processing Unit. It receives information, works on it, and gives us the result.</p>
 <p>Why do we call it the brain of the computer? Just like our brain thinks, remembers, and controls our whole body, the microprocessor thinks for the computer and controls all of its parts. Without it, the computer can do nothing at all.</p>
 <p>The microprocessor does three main jobs. One: it calculates — it adds, subtracts, and solves problems very fast. Two: it makes decisions. Three: it controls every part of the computer — like a boss giving orders to everyone.</p>
 <p>Where is the microprocessor? It sits inside the system unit, on the motherboard. And it works super fast — it can do millions of small jobs in just one second! That is why the computer answers us so quickly.</p>
 <p>Let us revise. The microprocessor is a small chip — the C P U — and it is the brain of the computer. It calculates, it decides, and it controls everything. In the next lesson, we will learn about input and output devices. Goodbye, and keep learning!</p>
-<h3>Exam questions — test yourself</h3>
+<h3 id="questions">Exam questions — test yourself</h3>
 <p><b>Q1.</b> What is a microprocessor?</p><ul style="list-style:none"><li>a) A type of software</li><li>b) A computer screen</li><li>c) A small electronic chip inside the computer</li><li>d) A part of the printer</li></ul><p><b>Q2.</b> CPU stands for:</p><ul style="list-style:none"><li>a) Computer Personal Unit</li><li>b) Central Processing Unit</li><li>c) Central Program Utility</li><li>d) Control Processing Unit</li></ul><p><b>Q3.</b> Which of these is NOT one of the three main jobs of the microprocessor?</p><ul style="list-style:none"><li>a) Calculating</li><li>b) Making decisions</li><li>c) Controlling every part of the computer</li><li>d) Printing our work on paper</li></ul><p><b>Q4.</b> Why is the microprocessor called the brain of the computer?</p><p><b>Q5.</b> Where is the microprocessor located, and how fast does it work?</p>
 <details><summary><b>Answers — click to check</b></summary>
 <p><b>Q1:</b> A small electronic chip inside the computer</p><p><b>Q2:</b> Central Processing Unit</p><p><b>Q3:</b> Printing our work on paper</p><p><b>Q4:</b> Just like our brain thinks, remembers and controls our whole body, the microprocessor thinks for the computer and controls all of its parts. Without it, the computer can do nothing at all.</p><p><b>Q5:</b> It sits inside the system unit, on the motherboard. It works super fast — it can do millions of small jobs in just one second.</p>

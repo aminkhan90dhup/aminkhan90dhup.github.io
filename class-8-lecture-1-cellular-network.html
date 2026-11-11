@@ -106,6 +106,12 @@ nav.main>a:hover,.drop-btn:hover{box-shadow:inset 0 -3px 0 var(--red);text-decor
 .btn-red{background:var(--red);color:#fff}.btn-white{background:#fff;color:#141414}.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.65)}
 .btn-green{background:#141414;color:#fff}
 .btn-outline{background:var(--surface);color:var(--ink);border-color:var(--line)}
+/* CTA buttons (2026-11-11) — blue/green lecture buttons; BBC red/black theme otherwise untouched */
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.cta-row .btn{border-radius:6px}
+.cta-btn-blue{background:#1565C0;color:#fff}
+.cta-btn-green{background:#2E7D32;color:#fff}
+@media(max-width:640px){.cta-row .btn{flex:1 1 100%}}
 @media(max-width:640px){.hero-img{height:700px}.hero-inner h1{font-size:34px;overflow-wrap:break-word;line-height:1.1}.hero-inner p{font-size:15.5px}.hero-inner{padding-bottom:30px}}
 /* Stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px auto 0}
@@ -296,7 +302,8 @@ a,button{-webkit-tap-highlight-color:transparent}
 <div class="kicker">Lectures by Hazrat Amin • Class 8</div>
 <h1>Lecture 1: Cellular Network</h1>
 <p class="lead">Your phone connects to a network of small cells, each with its own tower. The core network — the brain of the system — joins your call, handover keeps it alive while you move, and frequency reuse lets millions of people talk at the same time.</p>
-<div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/eNNr9GsPJpg" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
+<div class="cta-row"><a class="btn cta-btn-blue" href="#video">🎥 Watch Video</a><a class="btn cta-btn-green" href="#notes">📝 Notes</a><a class="btn btn-outline" href="#questions">❓ Exam Questions</a></div>
+<div id="video" style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/eNNr9GsPJpg" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
 <h3>What you will learn</h3>
 <ul>
   <li>The coverage area is divided into small hexagonal areas called <b>cells</b> (like a honeycomb). Each cell has a tower — a <b>Base Station (BTS)</b> — at its centre, and your phone connects by radio waves to the nearest cell's tower.</li>
@@ -307,7 +314,7 @@ a,button{-webkit-tap-highlight-color:transparent}
   <li>Generations: <b>2G</b> calls + SMS only; <b>3G</b> calls + slow internet; <b>4G (LTE)</b> fast internet; <b>5G</b> extremely fast with very low delay.</li>
   <li>Why the signal gets weak: distance from the tower, obstacles in between (mountains and walls), or too many users on one tower at the same time.</li>
 </ul>
-<h3>Full transcript</h3>
+<h3 id="notes">Full transcript</h3>
 <p>Assalam-o-Alaikum, dear students! Welcome to Computer Science, Class Eight. I am your teacher, Hazrat Amin. Today we start a brand new topic: the cellular network. Every day, millions of people talk on their mobile phones — but have you ever wondered how your voice travels through the air and reaches your friend's phone? In this lecture, we will discover the answer, step by step.</p>
 <p>First, why is it called a cellular network? The whole coverage area is divided into small areas called cells — like the cells of a honeycomb made by bees. In the middle of every cell there is a tower, called a base station. Your phone does not connect to one big tower far away. It connects, through radio waves, to the tower of the cell where you are standing. And when you move to another area, your cell changes too!</p>
 <p>A cellular system has three main parts. Part one: the mobile station — that is your phone and your SIM. Your SIM carries a special number called IMSI, which is your identity on the network. Part two: the base station — the tower that receives your phone's radio signals and passes them on. Part three: the core network. Its main switch, the MSC, is the brain of the system. It checks a register called the HLR, to make sure your SIM is real and has balance or a package.</p>
@@ -316,7 +323,7 @@ a,button{-webkit-tap-highlight-color:transparent}
 <p>Now, a clever trick: frequency reuse. Every tower can use only a small set of radio frequencies, and there are not enough frequencies for every tower to have its own separate set. So, the same frequency is used again in another cell, far away. Because those cells are far apart, their signals never disturb each other. Thanks to this reuse, millions of people can talk at the same time, in the same city, on the same small set of frequencies. This clever trick is the heart of the cellular idea!</p>
 <p>Mobile networks have grown through generations. 2G, the second generation, gave us calls and SMS messages — nothing more. 3G added the internet, but it was slow. 4G, also called LTE, brought fast internet: videos, games and video calls — and even our voice now travels as data. And 5G, the newest generation, is extremely fast, with almost no delay at all. Each new generation makes the network faster, and able to serve many more people at the same time.</p>
 <p>Finally, why does the signal sometimes get weak? There are three reasons. One: you are far away from the tower. Two: something blocks the radio waves — walls, and in our area, the big mountains of Kohistan. Three: too many people are using the same tower at the same time. Let us revise: a network of small cells, each with its own tower; the core network is the brain; handover keeps our calls alive while we move; and frequency reuse lets millions talk at once. In the next lecture, we will learn how mobile internet works. Goodbye, and keep learning!</p>
-<h3>Exam questions — test yourself</h3>
+<h3 id="questions">Exam questions — test yourself</h3>
 <p><b>Q1.</b> Why is a mobile network called "cellular"?</p><ul style="list-style:none"><li>a) Because the phone has a battery cell</li><li>b) Because the coverage area is divided into small areas called cells</li><li>c) Because the towers look like a honeycomb</li><li>d) Because it sells phones</li></ul><p><b>Q2.</b> The special number on your SIM that is your identity on the network is called:</p><ul style="list-style:none"><li>a) MSC</li><li>b) HLR</li><li>c) IMSI</li><li>d) BTS</li></ul><p><b>Q3.</b> When you move from one cell into another during a call, the system hands your connection to the new tower. This is called:</p><ul style="list-style:none"><li>a) Frequency reuse</li><li>b) Paging</li><li>c) Handover</li><li>d) Roaming</li></ul><p><b>Q4.</b> Name the three main parts of a cellular system and write one line about each.</p><p><b>Q5.</b> Write three reasons why the mobile signal gets weak.</p>
 <details><summary><b>Answers — click to check</b></summary>
 <p><b>Q1:</b> Because the coverage area is divided into small areas called cells</p><p><b>Q2:</b> IMSI</p><p><b>Q3:</b> Handover</p><p><b>Q4:</b> (1) Mobile station — your phone and SIM; the SIM's IMSI number is your identity on the network. (2) Base station — the tower in each cell that receives your phone's radio signals. (3) Core network — the brain of the system; its main switch (MSC) decides where a call goes and checks the HLR register to confirm the SIM is genuine.</p><p><b>Q5:</b> (1) You are far away from the tower. (2) Obstacles block the radio waves — walls, and in our area the big mountains. (3) Too many people are using the same tower at the same time.</p>

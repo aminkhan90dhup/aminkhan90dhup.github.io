@@ -106,6 +106,12 @@ nav.main>a:hover,.drop-btn:hover{box-shadow:inset 0 -3px 0 var(--red);text-decor
 .btn-red{background:var(--red);color:#fff}.btn-white{background:#fff;color:#141414}.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.65)}
 .btn-green{background:#141414;color:#fff}
 .btn-outline{background:var(--surface);color:var(--ink);border-color:var(--line)}
+/* CTA buttons (2026-11-11) — blue/green lecture buttons; BBC red/black theme otherwise untouched */
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.cta-row .btn{border-radius:6px}
+.cta-btn-blue{background:#1565C0;color:#fff}
+.cta-btn-green{background:#2E7D32;color:#fff}
+@media(max-width:640px){.cta-row .btn{flex:1 1 100%}}
 @media(max-width:640px){.hero-img{height:700px}.hero-inner h1{font-size:34px;overflow-wrap:break-word;line-height:1.1}.hero-inner p{font-size:15.5px}.hero-inner{padding-bottom:30px}}
 /* Stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px auto 0}
@@ -296,7 +302,8 @@ a,button{-webkit-tap-highlight-color:transparent}
 <div class="kicker">Lectures by Hazrat Amin • Class 8</div>
 <h1>Natural &amp; Artificial Satellites</h1>
 <p class="lead">What is a satellite, and where do satellites live? The Moon — made by nature — and the thousands of artificial satellites made by humans, living in three orbits: LEO, MEO and GEO. Explained with animation, Urdu narration and Urdu subtitles.</p>
-<div style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/N80zUAk-w4I" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
+<div class="cta-row"><a class="btn cta-btn-blue" href="#video">🎥 Watch Video</a><a class="btn cta-btn-green" href="#notes">📝 Notes</a><a class="btn btn-outline" href="#questions">❓ Exam Questions</a></div>
+<div id="video" style="position:relative;padding-top:56.25%;margin:14px 0"><iframe src="https://www.youtube-nocookie.com/embed/N80zUAk-w4I" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe></div>
 <h3>What you will learn</h3>
 <ul>
   <li>A <b>satellite</b> is an object that moves around a planet in a path called an <b>orbit</b>.</li>
@@ -305,13 +312,13 @@ a,button{-webkit-tap-highlight-color:transparent}
   <li>Artificial satellites live in three main orbits: <b>Low Earth Orbit (LEO)</b>, about 400 to 2,000 kilometres up — the Space Station and Earth-observing satellites; <b>Medium Earth Orbit (MEO)</b>, about 20,000 kilometres up — GPS navigation satellites; and <b>Geostationary Orbit (GEO)</b>, about 36,000 kilometres up — TV and weather satellites that stay fixed over one place.</li>
   <li>Satellites help us every day: they guide our maps, show the weather, carry TV signals, and let us talk across the world.</li>
 </ul>
-<h3>Full transcript (Urdu narration)</h3>
+<h3 id="notes">Full transcript (Urdu narration)</h3>
 <p>پیارے بچو! آج ہم سیٹلائٹ کے بارے میں سیکھیں گے۔ سیٹلائٹ وہ چیز ہے جو کسی سیارے کے گرد مدار میں گھومتی ہے۔ زمین کا ایک قدرتی سیٹلائٹ ہے، اور انسانوں نے ہزاروں مصنوعی سیٹلائٹ خلا میں بھیجے ہیں۔</p>
 <p>قدرتی سیٹلائٹ قدرت کا بنایا ہوا ہوتا ہے، انسان کا نہیں۔ ہمارا چاند زمین کا قدرتی سیٹلائٹ ہے۔ یہ تقریباً 27 دن میں زمین کے گرد ایک چکر لگاتا ہے اور تقریباً 384,000 کلومیٹر دور ہے۔ مریخ کے 2، مشتری کے 90 سے زیادہ اور زحل کے 140 سے زیادہ چاند ہیں۔</p>
 <p>مصنوعی سیٹلائٹ انسان بناتا ہے اور راکٹ سے خلا میں بھیجا جاتا ہے۔ پہلا سیٹلائٹ اسپتنک ون 1957 میں بھیجا گیا تھا۔ آج ہزاروں مصنوعی سیٹلائٹ زمین کے گرد گھوم رہے ہیں اور ہر ایک کا اپنا کام ہے۔</p>
 <p>مصنوعی سیٹلائٹ تین بڑے مداروں میں رہتے ہیں۔ لو ارتھ آربٹ، تقریباً 400 سے 2000 کلومیٹر اوپر، جہاں اسپیس اسٹیشن ہے۔ میڈیم ارتھ آربٹ، تقریباً 20,000 کلومیٹر اوپر، جہاں جی پی ایس سیٹلائٹ ہیں۔ اور جیوسٹیشنری آربٹ، تقریباً 36,000 کلومیٹر اوپر، جہاں ٹی وی اور موسم کے سیٹلائٹ ایک ہی جگہ کے اوپر ٹھہرے رہتے ہیں۔</p>
 <p>سیٹلائٹ ہماری روزمرہ زندگی میں مدد کرتے ہیں: نقشوں کی رہنمائی، موسم کی خبر، ٹی وی سگنل اور دنیا بھر میں بات چیت۔ یاد رکھیں: قدرتی سیٹلائٹ قدرت کا بنایا ہوا ہے، جیسے چاند۔ مصنوعی سیٹلائٹ انسان کا بنایا ہوا ہے، جیسے جی پی ایس اور ٹی وی سیٹلائٹ۔ دونوں کسی سیارے کے گرد مدار میں رہتے ہیں۔ شکریہ!</p>
-<h3>Exam questions — test yourself</h3>
+<h3 id="questions">Exam questions — test yourself</h3>
 <p><b>Q1.</b> The Moon takes about how long to go once around the Earth?</p><ul style="list-style:none"><li>a) 7 days</li><li>b) 27 days</li><li>c) 365 days</li><li>d) 24 hours</li></ul><p><b>Q2.</b> The first artificial satellite, launched in 1957, was called:</p><ul style="list-style:none"><li>a) Sputnik 1</li><li>b) The Space Station</li><li>c) GPS</li><li>d) Hubble</li></ul><p><b>Q3.</b> GPS navigation satellites live in which orbit?</p><ul style="list-style:none"><li>a) Low Earth Orbit (LEO)</li><li>b) Medium Earth Orbit (MEO)</li><li>c) Geostationary Orbit (GEO)</li><li>d) No orbit — they fly freely</li></ul><p><b>Q4.</b> Name the three main orbits of artificial satellites and write one use of each.</p><p><b>Q5.</b> What is the difference between a natural satellite and an artificial satellite? Give one example of each.</p>
 <details><summary><b>Answers — click to check</b></summary>
 <p><b>Q1:</b> 27 days</p><p><b>Q2:</b> Sputnik 1</p><p><b>Q3:</b> Medium Earth Orbit (MEO)</p><p><b>Q4:</b> (1) Low Earth Orbit (LEO), about 400 to 2,000 km up — the Space Station and Earth-observing satellites. (2) Medium Earth Orbit (MEO), about 20,000 km up — GPS navigation satellites. (3) Geostationary Orbit (GEO), about 36,000 km up — TV and weather satellites that stay fixed over one place.</p><p><b>Q5:</b> A natural satellite is made by nature — for example, our Moon. An artificial satellite is made by humans and launched by a rocket — for example, a GPS or TV satellite.</p>
