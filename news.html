@@ -303,8 +303,8 @@ a,button{-webkit-tap-highlight-color:transparent}
 
     <section class="card" id="listen-live" style="margin-top:18px">
       <span class="tag" style="background:#0B4F8A;color:#fff">🎧 LISTEN LIVE</span>
-      <h3 style="margin-top:8px">Listen Live — Radio &amp; News Channels</h3>
-      <p>Live audio nashriyat — radio aur news channels ki live streaming yahan sunen. Apni pasand ke channel ka button dabayen, awaz khud shuru ho jayegi.</p>
+      <h3 style="margin-top:8px">Listen Live — Radio Stations</h3>
+      <p>Live audio nashriyat — radio ki live streaming yahan sunen. Apni pasand ke channel ka button dabayen, awaz khud shuru ho jayegi.</p>
       <div id="stationBtns" style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0"></div>
       <audio id="liveAudio" controls preload="none" style="width:100%"></audio>
       <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
@@ -315,11 +315,6 @@ a,button{-webkit-tap-highlight-color:transparent}
         {name:'\u{1F3B5} Hum FM 106 — Urdu Music (Pakistan)', url:'https://funasia.streamguys1.com/live4'},
         {name:'\u{1F3B6} Radio Mirchi 98.3 — Bollywood Hindi', url:'https://playerservices.streamtheworld.com/api/livestream-redirect/NJS_HIN_ESTAAC.aac'},
         {name:'\u{1F4FB} Vividh Bharati — Hindi Classic Songs', url:'https://air.pc.cdn.bitgravity.com/air/live/pbaudio001/playlist.m3u8', hls:true},
-        {name:'\u{1F399} Power99 FM 99.0 — Islamabad (Pakistan)', link:'https://power99.live/en/listen'},
-        {name:'\u{1F3A7} BBC Asian Network — Live Radio', link:'https://www.bbc.co.uk/sounds/play/live:bbc_asian_network'},
-        {name:'\u{1F4FB} Instant Radio — Website', link:'https://instant.radio/'},
-        {name:'\u{1F3CF} PCB Live — Official Match Stream', link:'https://live.pcb.com.pk/home'},
-        {name:'\u{1F3CF} Tamasha — Live Match', link:'https://tamashaweb.com/'}
       ];
       (function(){
         var box=document.getElementById('stationBtns'), au=document.getElementById('liveAudio'), note=document.getElementById('stationNote');
@@ -348,7 +343,7 @@ a,button{-webkit-tap-highlight-color:transparent}
             navigator.mediaSession.setActionHandler('pause',function(){ try{ au.pause(); }catch(e){} });
           }
         }catch(e){}
-        note.textContent='Apni pasand ka channel chunen — BBC World Service, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge; BBC Asian Network, Instant Radio, PCB Live, Tamasha aur Power99 FM 99.0 un ki apni website par khulenge.';
+        note.textContent='Apni pasand ka channel chunen — BBC News, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge.';
         // Background playback: tell the Android app (if running inside it) when radio starts/stops,
         // so the app can hold a foreground service and the stream keeps playing while minimized.
         function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
@@ -358,7 +353,7 @@ a,button{-webkit-tap-highlight-color:transparent}
         // notification player. Harmless in a plain browser (HAAndroid absent).
         window.__haNativeStation=function(name){ window.__currentStation=name; wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Abhi chal raha hai (app player): '+name; };
         window.__haNativePaused=function(name){ if(name){ window.__currentStation=name; } wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Paused (app player): '+(window.__currentStation||''); };
-        window.__haNativeStopped=function(){ window.__currentStation=null; wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Apni pasand ka channel chunen — BBC World Service, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge; BBC Asian Network, Instant Radio, PCB Live, Tamasha aur Power99 FM 99.0 un ki apni website par khulenge.'; };
+        window.__haNativeStopped=function(){ window.__currentStation=null; wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Apni pasand ka channel chunen — BBC News, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge.'; };
         au.addEventListener('playing',function(){ if(window.__currentStation){ note.textContent='Abhi chal raha hai: '+window.__currentStation; } });
         au.addEventListener('play',function(){ wantPlay=true; bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); navigator.mediaSession.playbackState='playing'; } }catch(e){} });
         au.addEventListener('pause',function(){ if(window.__nativeHandover){ window.__nativeHandover=false; return; } bridge(false); if(document.hidden || document.visibilityState==='hidden'){ pausedWhileHidden=true; } try{ if('mediaSession' in navigator){ navigator.mediaSession.playbackState='paused'; } }catch(e){} });
