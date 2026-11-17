@@ -448,10 +448,28 @@ a,button{-webkit-tap-highlight-color:transparent}
         }
       }catch(e){}
       function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
+      // v1.4 native app player: the Android app plays audio natively in a
+      // foreground service (survives app close); these hooks let the app keep
+      // this page's station note in sync when the station changes from the
+      // notification player. Harmless in a plain browser (HAAndroid absent).
+      window.__haNativeStation=function(name){ window.__currentStation=name; wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Abhi chal raha hai (app player): '+name; };
+      window.__haNativePaused=function(name){ if(name){ window.__currentStation=name; } wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Paused (app player): '+(window.__currentStation||''); };
+      window.__haNativeStopped=function(){ window.__currentStation=null; wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.innerHTML='BBC News sunne ke liye upar wala button dabayen. Baqi tamam channels (BBC Asian Network, PCB Live, Tamasha waghera) <a href="news.html">News page ke Listen Live section</a> mein hain.'; };
       au.addEventListener('play',function(){ wantPlay=true; bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); navigator.mediaSession.playbackState='playing'; } }catch(e){} });
-      au.addEventListener('pause',function(){ bridge(false); if(document.hidden || document.visibilityState==='hidden'){ pausedWhileHidden=true; } try{ if('mediaSession' in navigator){ navigator.mediaSession.playbackState='paused'; } }catch(e){} });
+      au.addEventListener('pause',function(){ if(window.__nativeHandover){ window.__nativeHandover=false; return; } bridge(false); if(document.hidden || document.visibilityState==='hidden'){ pausedWhileHidden=true; } try{ if('mediaSession' in navigator){ navigator.mediaSession.playbackState='paused'; } }catch(e){} });
       au.addEventListener('ended',function(){ bridge(false); });
       btn.onclick=function(){
+        // v1.4: inside the Android app, hand playback to the native foreground
+        // service so the radio keeps playing after the app is closed; the
+        // WebView audio stays silent (no double sound).
+        if(window.HAAndroid && window.HAAndroid.radioPlayStation){
+          window.__nativeHandover=true;
+          try{ au.pause(); au.removeAttribute('src'); au.load(); }catch(e){}
+          window.__currentStation='🌍 BBC News — Live Radio'; wantPlay=false; pausedWhileHidden=false;
+          note.textContent='Abhi chal raha hai (app player): 🌍 BBC News — BBC World Service (Live)';
+          try{ HAAndroid.radioPlayStation('https://stream.live.vc.bbcmedia.co.uk/bbc_world_service', '🌍 BBC News — Live Radio'); }catch(e){}
+          return;
+        }
         if(!au.src){ au.src='https://stream.live.vc.bbcmedia.co.uk/bbc_world_service'; }
         wantPlay=true; pausedWhileHidden=false;
         tryPlay();

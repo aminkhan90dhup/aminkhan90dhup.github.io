@@ -352,15 +352,34 @@ a,button{-webkit-tap-highlight-color:transparent}
         // Background playback: tell the Android app (if running inside it) when radio starts/stops,
         // so the app can hold a foreground service and the stream keeps playing while minimized.
         function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
+        // v1.4 native app player: the Android app plays audio natively in a
+        // foreground service (survives app close); these hooks let the app keep
+        // this page's station note in sync when the station changes from the
+        // notification player. Harmless in a plain browser (HAAndroid absent).
+        window.__haNativeStation=function(name){ window.__currentStation=name; wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Abhi chal raha hai (app player): '+name; };
+        window.__haNativePaused=function(name){ if(name){ window.__currentStation=name; } wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Paused (app player): '+(window.__currentStation||''); };
+        window.__haNativeStopped=function(){ window.__currentStation=null; wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Apni pasand ka channel chunen — BBC World Service, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge; BBC Asian Network, Instant Radio, PCB Live, Tamasha aur Power99 FM 99.0 un ki apni website par khulenge.'; };
         au.addEventListener('playing',function(){ if(window.__currentStation){ note.textContent='Abhi chal raha hai: '+window.__currentStation; } });
         au.addEventListener('play',function(){ wantPlay=true; bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); navigator.mediaSession.playbackState='playing'; } }catch(e){} });
-        au.addEventListener('pause',function(){ bridge(false); if(document.hidden || document.visibilityState==='hidden'){ pausedWhileHidden=true; } try{ if('mediaSession' in navigator){ navigator.mediaSession.playbackState='paused'; } }catch(e){} });
+        au.addEventListener('pause',function(){ if(window.__nativeHandover){ window.__nativeHandover=false; return; } bridge(false); if(document.hidden || document.visibilityState==='hidden'){ pausedWhileHidden=true; } try{ if('mediaSession' in navigator){ navigator.mediaSession.playbackState='paused'; } }catch(e){} });
         au.addEventListener('ended',function(){ bridge(false); });
         STATIONS.forEach(function(st){
           var b=document.createElement('button');
           b.textContent=st.name; b.className='btn'; b.style.cursor='pointer';
           b.onclick=function(){
             if(st.link){ window.open(st.link,'_blank','noopener'); note.textContent=st.name+' — nayi tab mein khul gaya hai.'; return; }
+            // v1.4: inside the Android app, hand playback to the native
+            // foreground service so the radio keeps playing after the app is
+            // closed; the WebView audio stays silent (no double sound).
+            if(window.HAAndroid && window.HAAndroid.radioPlayStation){
+              try{ if(window.__hls){ window.__hls.destroy(); window.__hls=null; } }catch(e){}
+              window.__nativeHandover=true;
+              try{ au.pause(); au.removeAttribute('src'); au.load(); }catch(e){}
+              window.__currentStation=st.name; wantPlay=false; pausedWhileHidden=false;
+              note.textContent='Abhi chal raha hai (app player): '+st.name+' …';
+              try{ HAAndroid.radioPlayStation(st.url, st.name); }catch(e){}
+              return;
+            }
             try{ if(window.__hls){ window.__hls.destroy(); window.__hls=null; } }catch(e){}
             au.style.display=''; window.__currentStation=st.name; wantPlay=true; pausedWhileHidden=false;
             note.textContent='Load ho raha hai: '+st.name+' …';
