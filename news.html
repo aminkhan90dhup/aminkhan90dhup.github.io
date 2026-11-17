@@ -322,8 +322,9 @@ a,button{-webkit-tap-highlight-color:transparent}
         // Chrome throttles a locked/background tab's JS; a big HLS buffer (below) plus
         // stall/visibility recovery keeps the radio alive instead of dying ~5 min after lock.
         var wantPlay=false, pausedWhileHidden=false;
-        function tryPlay(){ try{ var pr=au.play(); if(pr&&pr.catch){ pr.catch(function(){}); } }catch(e){} }
+        function tryPlay(){ if(window.__haNativeActive){ return; } try{ var pr=au.play(); if(pr&&pr.catch){ pr.catch(function(){}); } }catch(e){} }
         function recoverPlayback(){
+          if(window.__haNativeActive){ return; }
           if(!wantPlay || !window.__currentStation){ return; }
           try{ if(window.__hls){ window.__hls.startLoad(); } }catch(e){}
           if(au.paused || au.readyState<3){ tryPlay(); }
@@ -339,7 +340,7 @@ a,button{-webkit-tap-highlight-color:transparent}
         });
         try{
           if('mediaSession' in navigator){
-            navigator.mediaSession.setActionHandler('play',function(){ wantPlay=true; tryPlay(); });
+            navigator.mediaSession.setActionHandler('play',function(){ if(window.__haNativeActive){ return; } wantPlay=true; tryPlay(); });
             navigator.mediaSession.setActionHandler('pause',function(){ try{ au.pause(); }catch(e){} });
           }
         }catch(e){}
@@ -351,11 +352,12 @@ a,button{-webkit-tap-highlight-color:transparent}
         // foreground service (survives app close); these hooks let the app keep
         // this page's station note in sync when the station changes from the
         // notification player. Harmless in a plain browser (HAAndroid absent).
-        window.__haNativeStation=function(name){ window.__currentStation=name; wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Abhi chal raha hai (app player): '+name; };
-        window.__haNativePaused=function(name){ if(name){ window.__currentStation=name; } wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Paused (app player): '+(window.__currentStation||''); };
-        window.__haNativeStopped=function(){ window.__currentStation=null; wantPlay=false; try{ window.__nativeHandover=true; au.pause(); }catch(e){} note.textContent='Apni pasand ka channel chunen — BBC News, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge.'; };
+        window.__haNativeStation=function(name){ window.__currentStation=name; wantPlay=false; try{ window.__nativeHandover=true; window.__haNativeActive=true; au.pause(); au.src=''; }catch(e){} note.textContent='Abhi chal raha hai (app player): '+name; };
+        window.__haNativePaused=function(name){ if(name){ window.__currentStation=name; } wantPlay=false; try{ window.__nativeHandover=true; window.__haNativeActive=true; au.pause(); au.src=''; }catch(e){} note.textContent='Paused (app player): '+(window.__currentStation||''); };
+        window.__haNativeStopped=function(){ window.__currentStation=null; wantPlay=false; try{ window.__nativeHandover=true; window.__haNativeActive=false; au.pause(); au.src=''; }catch(e){} note.textContent='Apni pasand ka channel chunen — BBC News, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge.'; };
+        window.__haNativeFailed=function(name){ window.__currentStation=name; wantPlay=false; try{ window.__nativeHandover=true; window.__haNativeActive=true; au.pause(); au.src=''; }catch(e){} note.textContent='Ye station abhi nahi chal saka — dobara try karen: '+name; };
         au.addEventListener('playing',function(){ if(window.__currentStation){ note.textContent='Abhi chal raha hai: '+window.__currentStation; } });
-        au.addEventListener('play',function(){ wantPlay=true; bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); navigator.mediaSession.playbackState='playing'; } }catch(e){} });
+        au.addEventListener('play',function(){ if(window.__haNativeActive){ try{ au.pause(); au.src=''; }catch(e){} return; } wantPlay=true; bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); navigator.mediaSession.playbackState='playing'; } }catch(e){} });
         au.addEventListener('pause',function(){ if(window.__nativeHandover){ window.__nativeHandover=false; return; } bridge(false); if(document.hidden || document.visibilityState==='hidden'){ pausedWhileHidden=true; } try{ if('mediaSession' in navigator){ navigator.mediaSession.playbackState='paused'; } }catch(e){} });
         au.addEventListener('ended',function(){ bridge(false); });
         STATIONS.forEach(function(st){
@@ -368,8 +370,8 @@ a,button{-webkit-tap-highlight-color:transparent}
             // closed; the WebView audio stays silent (no double sound).
             if(window.HAAndroid && window.HAAndroid.radioPlayStation){
               try{ if(window.__hls){ window.__hls.destroy(); window.__hls=null; } }catch(e){}
-              window.__nativeHandover=true;
-              try{ au.pause(); au.removeAttribute('src'); au.load(); }catch(e){}
+              window.__nativeHandover=true; window.__haNativeActive=true;
+              try{ au.pause(); au.src=''; au.removeAttribute('src'); au.load(); }catch(e){}
               window.__currentStation=st.name; wantPlay=false; pausedWhileHidden=false;
               note.textContent='Abhi chal raha hai (app player): '+st.name+' …';
               try{ HAAndroid.radioPlayStation(st.url, st.name); }catch(e){}
