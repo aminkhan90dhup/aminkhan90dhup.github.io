@@ -313,7 +313,9 @@ a,button{-webkit-tap-highlight-color:transparent}
       var STATIONS=[
         {name:'\u{1F30D} BBC News — Live Radio', url:'https://stream.live.vc.bbcmedia.co.uk/bbc_world_service'},
         {name:'\u{1F3B5} Hum FM 106 — Urdu Music (Pakistan)', url:'https://funasia.streamguys1.com/live4'},
-        {name:'\u{1F3B6} Radio Mirchi 98.3 — Bollywood Hindi', url:'https://playerservices.streamtheworld.com/api/livestream-redirect/NJS_HIN_ESTAAC.m3u8'},
+        {name:'\u{1F3B5} FM Gold Delhi — Hindi Music & News', url:'https://d3r9rhourdc02u.cloudfront.net/assets/radio/airdelhi03/air003_Auto.m3u8', hls:true}, 
+        {name:'\u{1F3B6} FM Rainbow Delhi — Hindi Music', url:'https://d3r9rhourdc02u.cloudfront.net/assets/radio/airdelhi02/air002_Auto.m3u8', hls:true},
+        {name:'\u{1F4FB} Akashvani Srinagar — Urdu / Hindi', url:'https://radio.wavespb.com/live/01e2be674a0543a6/01e2be674a0543a6.m3u8', hls:true},
         {name:'\u{1F4FB} Vividh Bharati — Hindi Classic Songs', url:'https://air.pc.cdn.bitgravity.com/air/live/pbaudio001/playlist.m3u8', hls:true},
       ];
       (function(){
@@ -344,7 +346,7 @@ a,button{-webkit-tap-highlight-color:transparent}
             navigator.mediaSession.setActionHandler('pause',function(){ try{ au.pause(); }catch(e){} });
           }
         }catch(e){}
-        note.textContent='Apni pasand ka channel chunen — BBC News, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge.';
+        note.textContent='Apni pasand ka channel chunen — BBC News, Hum FM 106, FM Gold Delhi, FM Rainbow Delhi, Akashvani Srinagar aur Vividh Bharati yahin isi player mein chalenge.';
         // Background playback: tell the Android app (if running inside it) when radio starts/stops,
         // so the app can hold a foreground service and the stream keeps playing while minimized.
         function bridge(on){ try{ if(window.HAAndroid){ if(on){ HAAndroid.radioPlay(); } else { HAAndroid.radioStop(); } } }catch(e){} }
@@ -354,7 +356,7 @@ a,button{-webkit-tap-highlight-color:transparent}
         // notification player. Harmless in a plain browser (HAAndroid absent).
         window.__haNativeStation=function(name){ window.__currentStation=name; wantPlay=false; try{ window.__nativeHandover=true; window.__haNativeActive=true; au.pause(); au.src=''; }catch(e){} note.textContent='Abhi chal raha hai (app player): '+name; };
         window.__haNativePaused=function(name){ if(name){ window.__currentStation=name; } wantPlay=false; try{ window.__nativeHandover=true; window.__haNativeActive=true; au.pause(); au.src=''; }catch(e){} note.textContent='Paused (app player): '+(window.__currentStation||''); };
-        window.__haNativeStopped=function(){ window.__currentStation=null; wantPlay=false; try{ window.__nativeHandover=true; window.__haNativeActive=false; au.pause(); au.src=''; }catch(e){} note.textContent='Apni pasand ka channel chunen — BBC News, Hum FM 106, Radio Mirchi 98.3 aur Vividh Bharati yahin isi player mein chalenge.'; };
+        window.__haNativeStopped=function(){ window.__currentStation=null; wantPlay=false; try{ window.__nativeHandover=true; window.__haNativeActive=false; au.pause(); au.src=''; }catch(e){} note.textContent='Apni pasand ka channel chunen — BBC News, Hum FM 106, FM Gold Delhi, FM Rainbow Delhi, Akashvani Srinagar aur Vividh Bharati yahin isi player mein chalenge.'; };
         window.__haNativeFailed=function(name){ window.__currentStation=name; wantPlay=false; try{ window.__nativeHandover=true; window.__haNativeActive=true; au.pause(); au.src=''; }catch(e){} note.textContent='Ye station abhi nahi chal saka — dobara try karen: '+name; };
         au.addEventListener('playing',function(){ if(window.__currentStation){ note.textContent='Abhi chal raha hai: '+window.__currentStation; } });
         au.addEventListener('play',function(){ if(window.__haNativeActive){ try{ au.pause(); au.src=''; }catch(e){} return; } wantPlay=true; bridge(true); try{ if('mediaSession' in navigator){ navigator.mediaSession.metadata=new MediaMetadata({title:'BBC World Service — Live Radio',artist:'HazratAminOfficial • Listen Live',album:'Live Radio'}); navigator.mediaSession.playbackState='playing'; } }catch(e){} });
