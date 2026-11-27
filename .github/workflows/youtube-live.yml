@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Download loop video
         run: curl -L -o funny-loop.mp4 https://github.com/aminkhan90dhup/aminkhan90dhup.github.io/releases/download/live-loop-v1/funny-loop.mp4
       - name: Stream loop to YouTube
