@@ -1,0 +1,18 @@
+name: YouTube LIVE meme stream
+
+on:
+  workflow_dispatch:
+
+jobs:
+  stream:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Download loop video
+        run: curl -L -o funny-loop.mp4 https://github.com/aminkhan90dhup/aminkhan90dhup.github.io/releases/download/live-loop-v1/funny-loop.mp4
+      - name: Stream loop to YouTube
+        run: |
+          ffmpeg -re -stream_loop -1 -i funny-loop.mp4 \
+            -c:v libx264 -preset veryfast -maxrate 4500k -bufsize 9000k \
+            -pix_fmt yuv420p -g 60 -c:a aac -b:a 128k -ar 44100 \
+            -f flv "rtmp://a.rtmp.youtube.com/live2/${{ secrets.YT_STREAM_KEY }}"
