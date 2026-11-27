@@ -16,4 +16,4 @@ jobs:
         run: |
           ffmpeg -re -stream_loop -1 -i funny-loop.mp4 \
             -c:v copy -c:a copy \
-            -f flv "rtmp://a.rtmp.youtube.com/live2/${{ secrets.YT_STREAM_KEY }}"
+            -f flv "rtmp://b.rtmp.youtube.com/live2/${{ secrets.YT_STREAM_KEY }}"
