@@ -15,6 +15,5 @@ jobs:
       - name: Stream loop to YouTube
         run: |
           ffmpeg -re -stream_loop -1 -i funny-loop.mp4 \
-            -c:v libx264 -preset veryfast -maxrate 4500k -bufsize 9000k \
-            -pix_fmt yuv420p -g 60 -c:a aac -b:a 128k -ar 44100 \
+            -c:v copy -c:a copy \
             -f flv "rtmp://a.rtmp.youtube.com/live2/${{ secrets.YT_STREAM_KEY }}"
